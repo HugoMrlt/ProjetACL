@@ -16,6 +16,8 @@ public class ClientThread extends Thread {
         this.villesRequete = villesRequete;
     }
 
+    public void onResult(Graphe data, String label) {}
+
     @Override
     public void run() {
         String host = "localhost";
@@ -36,10 +38,8 @@ public class ClientThread extends Thread {
             Graphe data = Utils.parseJson(in);
 
             if (data != null) {
-                // 3. Affichage dans le thread AWT
-                EventQueue.invokeLater(() -> {
-                    new GraphFrame(clientNb, data).setVisible(true);
-                });
+                // Notifier le parent (ControlPanel) si surchargé
+                onResult(data, "Région: " + villesRequete);
             }
 
         } catch (IOException e) {

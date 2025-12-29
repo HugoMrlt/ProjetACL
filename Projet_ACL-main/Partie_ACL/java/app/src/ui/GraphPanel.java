@@ -6,13 +6,20 @@ import java.awt.*;
 import java.util.List;
 
 public class GraphPanel extends JPanel {
-    private final List<Vertex> vertices;
-    private final List<Edge> edges;
+    private List<Vertex> vertices;
+    private List<Edge> edges;
 
     public GraphPanel(Graphe data) {
         this.vertices = data.getVertices();
         this.edges = data.getEdges();
         setBackground(Color.WHITE);
+    }
+
+    // Permet de mettre à jour dynamiquement la carte
+    public void setGraphe(Graphe data) {
+        this.vertices = data.getVertices();
+        this.edges = data.getEdges();
+        repaint();
     }
 
     @Override
@@ -26,6 +33,25 @@ public class GraphPanel extends JPanel {
         RenderContext ctx = calculateScale();
         drawEdges(g2, ctx);
         drawVertices(g2, ctx);
+        drawLegend(g2);
+    }
+
+    private void drawLegend(Graphics2D g2) {
+        int x = getWidth() - 250;
+        int y = getHeight() - 30 - TypeRoute.values().length * 22;
+        g2.setColor(new Color(255,255,255,220));
+        g2.fillRoundRect(x - 10, y - 20, 240, 22 * TypeRoute.values().length + 30, 15, 15);
+        g2.setColor(Color.BLACK);
+        g2.drawString("Légende :", x, y);
+        int i = 1;
+        for (TypeRoute type : TypeRoute.values()) {
+            g2.setColor(type.getColor());
+            g2.setStroke(new BasicStroke(type.getStrokeWidth()));
+            g2.drawLine(x, y + i * 22, x + 30, y + i * 22);
+            g2.setColor(Color.BLACK);
+            g2.drawString(type.getLabel() + " (vitesse : " + (int)type.getVitesse() + " km/h)", x + 40, y + i * 22 + 5);
+            i++;
+        }
     }
 
     private RenderContext calculateScale() {
@@ -77,6 +103,13 @@ public class GraphPanel extends JPanel {
             int y2 = ctx.projectY(edge.getVertex2().getLatitude());
 
             g2.drawLine(x1, y1, x2, y2);
+
+            // Affichage de la distance au milieu du segment
+            int midX = (x1 + x2) / 2;
+            int midY = (y1 + y2) / 2;
+            g2.setColor(Color.BLACK);
+            g2.setFont(new Font("Arial", Font.PLAIN, 12));
+            g2.drawString(edge.getWeight() + " km", midX + 5, midY - 5);
         }
     }
 

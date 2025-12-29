@@ -22,11 +22,6 @@ public class Edge {
 
     // Logique métier pour AWT : associer une couleur au type
     public Color getAwtColor() {
-        if (roadType == null) return Color.BLACK;
-        switch (roadType.toLowerCase()) {
-            case "voie rapide": return Color.RED;
-            case "communale": return Color.GREEN;
-            default: return Color.GRAY;
-        }
+        return TypeRoute.fromString(this.roadType).getColor();
     }
 }

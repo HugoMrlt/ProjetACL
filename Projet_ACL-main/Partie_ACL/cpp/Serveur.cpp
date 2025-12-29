@@ -12,6 +12,7 @@
 #include "Graphe.h"
 #include "TSP.h"
 #include "TSPDistance.h"
+#include "TSPTemps.h"
 #include "JsonOutils.h"
 #include "Constantes.h"
 #include "CsvOutils.h"
@@ -32,44 +33,72 @@ int main() {
     address.sin_addr.s_addr = INADDR_ANY;
     address.sin_port = htons(8080);
 
-    if (bind(server_fd, (struct sockaddr *)&address, sizeof(address)) < 0) {
+    if (::bind(server_fd, (struct sockaddr *)&address, sizeof(address)) < 0) {
         perror("Bind failed");
         return -1;
     }
     listen(server_fd, 3);
-
     std::cout << "Serveur TSP C++ pret sur le port 8080..." << endl;
 
-    // Charger la base de données complète une seule fois au démarrage
-    vector<Ville> baseVilles = {
-        Ville("Strasbourg", 48.58, 7.75), Ville("Colmar", 49.26, 4.03),
-        Ville("Forbach", 49.19, 6.90), Ville("Haguenau", 48.82, 7.78),
-        Ville("Thionville", 49.37, 6.15), Ville("Sarreguemines", 49.10, 6.18),
-        Ville("Metz", 49.11, 6.17), Ville("Nancy", 48.69, 6.18)
-    };
-
-    auto mapTypesRoutes = CsvOutils::chargerTypesRoute(trouverCheminAssets("Type_de_route/GrandEst.csv"));
+    // Variables pour la config reçue
+    string region, mode, villeDepart;
+    int nbCamions = 1;
+    vector<Ville> baseVilles;
+    auto mapTypesRoutes = std::map<std::string, std::map<std::string, std::string>>();
 
     while (true) {
         new_socket = accept(server_fd, (struct sockaddr *)&address, (socklen_t*)&addrlen);
         
-        char buffer[2048] = {0}; // Buffer plus grand pour les listes de villes
+        char buffer[2048] = {0};
         read(new_socket, buffer, 2048);
         string requete(buffer);
         std::cout << "Requete Java recue : " << requete << endl;
 
+        // Parsing de la commande : region;mode;villeDepart;nbCamions
+        stringstream ss(requete);
+        getline(ss, region, ';');
+        getline(ss, mode, ';');
+        getline(ss, villeDepart, ';');
+        string nbCamionsStr;
+        getline(ss, nbCamionsStr, ';');
+        try { nbCamions = stoi(nbCamionsStr); } catch (...) { nbCamions = 1; }
+
+        // Nettoyage
+        region.erase(0, region.find_first_not_of(" \t\r\n"));
+        region.erase(region.find_last_not_of(" \t\r\n") + 1);
+        mode.erase(0, mode.find_first_not_of(" \t\r\n"));
+        mode.erase(mode.find_last_not_of(" \t\r\n") + 1);
+        villeDepart.erase(0, villeDepart.find_first_not_of(" \t\r\n"));
+        villeDepart.erase(villeDepart.find_last_not_of(" \t\r\n") + 1);
+
+        // Chargement dynamique des villes et types de routes
+        string cheminVilles = trouverCheminAssets("Region/" + region + ".json");
+        baseVilles = JsonOutils::chargerDepuisFichier(cheminVilles);
+        if (baseVilles.empty()) {
+            cerr << "ERREUR : Aucune ville chargée. Vérifiez le chemin : " << cheminVilles << endl;
+        } else {
+            cout << baseVilles.size() << " villes chargées dynamiquement pour la région " << region << "." << endl;
+        }
+        string cheminCSV = trouverCheminAssets("Type_de_route/" + region + ".csv");
+        mapTypesRoutes = CsvOutils::chargerTypesRoute(cheminCSV);
+
         // --- 1. FILTRAGE ET INITIALISATION DU GRAPHE ---
         Graphe<double, Ville> grapheDistance;
         vector<Sommet<Ville>*> sommetsSelectionnes;
-        IStrategieTSP* stratDist = new TSPDistance();
+        IStrategieTSP* strat = nullptr;
+        if (mode == "TEMPS") {
+            strat = new TSPTemps();
+        } else {
+            strat = new TSPDistance();
+        }
 
-        stringstream ss(requete);
-        string nomVille;
-        while (getline(ss, nomVille, ',')) {
-            // Nettoyage des espaces et retours à la ligne
-            nomVille.erase(0, nomVille.find_first_not_of(" \t\r\n"));
-            nomVille.erase(nomVille.find_last_not_of(" \t\r\n") + 1);
-
+        // On commence par la ville de départ, puis toutes les autres
+        vector<string> nomsVilles;
+        nomsVilles.push_back(villeDepart);
+        for (const auto& v : baseVilles) {
+            if (v.getName() != villeDepart) nomsVilles.push_back(v.getName());
+        }
+        for (const auto& nomVille : nomsVilles) {
             for (const auto& v : baseVilles) {
                 if (v.getName() == nomVille) {
                     sommetsSelectionnes.push_back(grapheDistance.creeSommet(v));
@@ -87,7 +116,7 @@ int main() {
                 string nomA = sommetsSelectionnes[i]->v.getName();
                 string nomB = sommetsSelectionnes[j]->v.getName();
                 string typeRouteReel = CsvOutils::getTypeRoute(mapTypesRoutes, nomA, nomB);
-                double poids = stratDist->calculerPoids(distKm, typeRouteReel);
+                double poids = strat->calculerPoids(distKm, typeRouteReel);
 
                 grapheDistance.creeArete(poids, sommetsSelectionnes[i], sommetsSelectionnes[j]);
                 grapheDistance.creeArete(poids, sommetsSelectionnes[j], sommetsSelectionnes[i]);
@@ -98,7 +127,7 @@ int main() {
         vector<Sommet<Ville>*> solution;
         if (!sommetsSelectionnes.empty()) {
             solution = TSP<double, Ville>::plusProcheVoisin(grapheDistance, sommetsSelectionnes[0]);
-            
+
             std::cout << "Solution trouvee (" << solution.size() << " villes)" << endl;
         }
 
@@ -134,9 +163,9 @@ int main() {
 
         string response = res.dump() + "\n"; 
         send(new_socket, response.c_str(), response.length(), 0);
-        
+
         close(new_socket);
-        delete stratDist;
+        delete strat;
         std::cout << "Solution envoyee au client Java.\n" << endl;
     }
 

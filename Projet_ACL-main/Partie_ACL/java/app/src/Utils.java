@@ -29,6 +29,9 @@ public class Utils {
 
         String name = readWindowName(json);
         List<Vertex> v = readVertices(json);
+
+        convertCoordinatesToScreen(v);
+
         List<Edge> e = readEdges(json, v);
 
         return new Graphe(name, v, e);
