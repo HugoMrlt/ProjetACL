@@ -1,18 +1,20 @@
-;Ajaccio;Bastia;Corte;Sartène;Propriano;Calvi;Borgo;Vico;Piedicroce;Morosaglia;Zicavo;Ghisonaccia;Cervione;L'Île-Rousse;Sisco;Moltifao;Poggio-di-Nazza
-Ajaccio;;Communale; Nationale; Route européenne; Autoroute; Départementale; Nationale; Départementale; Départementale;Communale; Départementale; Autoroute; Autoroute; Autoroute; Nationale; Autoroute; Nationale
-Bastia;;; Route européenne; Voie rapide;Communale; Nationale; Départementale; Voie rapide; Autoroute;Communale; Route européenne; Autoroute; Nationale; Départementale; Route européenne;Communale; Voie rapide
-Corte;;;; Route européenne; Voie rapide; Nationale;Communale;Communale; Route européenne;Communale; Autoroute; Voie rapide; Nationale; Nationale; Route européenne; Voie rapide; Nationale
-Sartène;;;;; Départementale; Route européenne; Départementale; Nationale; Nationale; Autoroute; Nationale; Voie rapide; Départementale;Communale; Nationale; Route européenne; Autoroute
-Propriano;;;;;; Départementale; Autoroute; Nationale;Communale; Autoroute;Communale; Route européenne; Voie rapide; Nationale; Route européenne; Départementale; Autoroute
-Calvi;;;;;;; Autoroute; Route européenne; Voie rapide; Autoroute; Départementale; Nationale; Route européenne;Communale; Route européenne; Départementale; Voie rapide
-Borgo;;;;;;;; Nationale; Route européenne; Autoroute; Départementale; Voie rapide;Communale; Voie rapide; Départementale; Nationale; Départementale
-Vico;;;;;;;;; Voie rapide; Nationale; Nationale; Autoroute; Autoroute; Nationale;Communale; Route européenne; Route européenne
-Piedicroce;;;;;;;;;; Voie rapide; Départementale; Nationale; Autoroute;Communale; Route européenne; Voie rapide; Départementale
-Morosaglia;;;;;;;;;;; Route européenne; Route européenne; Nationale; Départementale;Communale;Communale; Nationale
-Zicavo;;;;;;;;;;;; Nationale; Voie rapide; Autoroute; Autoroute; Route européenne; Route européenne
-Ghisonaccia;;;;;;;;;;;;; Autoroute; Autoroute; Autoroute; Route européenne; Route européenne
-Cervione;;;;;;;;;;;;;; Voie rapide; Départementale; Autoroute; Nationale
-L'Île-Rousse;;;;;;;;;;;;;;; Autoroute; Autoroute;Communale
-Sisco;;;;;;;;;;;;;;;; Route européenne; Route européenne
-Moltifao;;;;;;;;;;;;;;;;;Communale
-Poggio-di-Nazza;;;;;;;;;;;;;;;;;
+;Tours;Orléans;Blois;Chartres;Bourges;Châteauroux;Vierzon;Issoudun;Dreux;Saint-Amand-Montrond;Romorantin-Lanthenay;Gien;Montargis;Vendôme;Amboise;Loches;Chinon;Sully-sur-Loire;Nogent-le-Rotrou
+Tours;; Nationale; Autoroute; Autoroute; Départementale; Voie rapide; Nationale; Nationale; Départementale;Communale; Autoroute; Voie rapide;Communale; Départementale; Départementale; Route européenne; Départementale; Route européenne; Départementale
+Orléans;;;Communale; Route européenne; Voie rapide; Route européenne; Nationale; Route européenne; Autoroute; Voie rapide; Autoroute; Nationale; Autoroute;Communale; Départementale; Nationale; Route européenne; Nationale; Voie rapide
+Blois;;;; Route européenne;Communale; Départementale;Communale; Départementale; Autoroute;Communale; Route européenne;Communale; Nationale; Départementale; Départementale; Voie rapide; Autoroute; Route européenne; Voie rapide
+Chartres;;;;;Communale; Route européenne;Communale; Route européenne; Route européenne; Autoroute; Route européenne; Départementale; Départementale; Nationale; Nationale; Route européenne; Autoroute; Voie rapide; Route européenne
+Bourges;;;;;; Nationale; Départementale; Nationale; Route européenne; Départementale; Nationale;Communale; Départementale; Voie rapide; Route européenne; Nationale;Communale; Voie rapide; Route européenne
+Châteauroux;;;;;;; Route européenne; Route européenne; Voie rapide; Voie rapide; Voie rapide; Nationale; Route européenne; Voie rapide;Communale;Communale; Autoroute; Départementale; Départementale
+Vierzon;;;;;;;; Départementale;Communale;Communale; Autoroute; Nationale;Communale; Nationale; Autoroute; Route européenne; Route européenne; Départementale; Autoroute
+Issoudun;;;;;;;;; Voie rapide; Autoroute; Voie rapide;Communale; Départementale; Voie rapide; Voie rapide; Voie rapide; Voie rapide; Nationale; Autoroute
+Dreux;;;;;;;;;; Route européenne; Voie rapide; Autoroute;Communale; Autoroute; Autoroute; Autoroute;Communale; Départementale; Nationale
+Saint-Amand-Montrond;;;;;;;;;;; Départementale; Nationale; Route européenne;Communale; Autoroute;Communale; Départementale;Communale; Voie rapide
+Romorantin-Lanthenay;;;;;;;;;;;; Autoroute; Route européenne; Route européenne; Autoroute; Route européenne; Nationale; Nationale; Départementale
+Gien;;;;;;;;;;;;; Nationale; Route européenne; Voie rapide; Route européenne; Nationale;Communale; Route européenne
+Montargis;;;;;;;;;;;;;;Communale; Voie rapide; Route européenne; Voie rapide; Départementale; Nationale
+Vendôme;;;;;;;;;;;;;;;Communale;Communale; Route européenne; Autoroute; Départementale
+Amboise;;;;;;;;;;;;;;;; Voie rapide; Autoroute; Voie rapide; Nationale
+Loches;;;;;;;;;;;;;;;;; Départementale; Route européenne;Communale
+Chinon;;;;;;;;;;;;;;;;;; Voie rapide; Nationale
+Sully-sur-Loire;;;;;;;;;;;;;;;;;;; Autoroute
+Nogent-le-Rotrou;;;;;;;;;;;;;;;;;;;

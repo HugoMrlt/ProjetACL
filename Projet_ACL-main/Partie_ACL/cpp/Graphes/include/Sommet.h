@@ -2,32 +2,41 @@
 #define SOMMET_H
 
 #include "GElement.h"
+#include "IVisiteur.h"
 #include <string>
 #include <sstream>
 
+/**
+ * @brief Classe représentant un sommet dans un graphe.
+ * 
+ * @tparam T - Type des données associées au sommet.
+ */
 template <typename T>
 class Sommet : public GElement<T> {
 public:
     // Attribut public représentant le degré du sommet.
     int degre;
 
-    // Constructeur : initialise la clef, la valeur v (via GElement).
-    // et le degré à 0 par défaut (sommet isolé).
+    /**
+     * @brief Constructeur de Sommet.
+     * Initialise la clef, la valeur v (via GElement) et le degré à 0 par défaut (sommet isolé).
+     * 
+     * @param c - Clef primaire.
+     * @param val - Valeur associée au sommet.
+     * @param d - Degré initial du sommet.
+     */
     Sommet(int c = 0, T val = T(), int d = 0) 
         : GElement<T>(c, val), degre(d) {}
 
-    // Opérateur de conversion en string.
-    operator std::string() const {
-        std::ostringstream oss;
-        // On concatène la conversion de GElement et le degré.
-        oss << GElement<T>::operator std::string() << " [degre: " << degre << "]";
-        return oss.str();
-    }
+    //DP Visitor
 
-    // Opérateur << d'écriture sur un flux.
-    friend std::ostream& operator<<(std::ostream& os, const Sommet<T>& obj) {
-        os << (std::string)obj;
-        return os;
+    /**
+     * @brief Accepte un visiteur.
+     * 
+     * @param v - Visiteur à accepter.
+     */
+    void accept(IVisiteur<double, Ville>* v) override {
+        v->visiterSommet(this);
     }
 };
 

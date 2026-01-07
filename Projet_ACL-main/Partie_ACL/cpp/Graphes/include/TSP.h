@@ -6,7 +6,10 @@
 #include <limits>
 
 /**
- * Algorithme TSP générique (heuristique du plus proche voisin)
+ * @brief Algorithme TSP générique (heuristique du plus proche voisin).
+ * 
+ * @tparam S - Type des poids des arêtes.
+ * @tparam T - Type des données des sommets.
  */
 template<typename S, typename T>
 class TSP {

@@ -1,7 +1,7 @@
 package src;
 
 import src.modeles.Graphe;
-import src.ui.GraphFrame;
+import src.ui.FenetreGraphe;
 import java.util.ArrayList;
 
 
@@ -10,7 +10,7 @@ public class Main {
         System.out.println("Lancement du Client Algogistique (AWT)...");
         // Lancer l’interface graphique principale ici
         javax.swing.SwingUtilities.invokeLater(() -> {
-            GraphFrame frame = new GraphFrame(1, new Graphe("", new ArrayList<>(), new ArrayList<>()));
+            FenetreGraphe frame = new FenetreGraphe(1, new Graphe("", new ArrayList<>(), new ArrayList<>()));
             frame.setVisible(true);
         });
     }

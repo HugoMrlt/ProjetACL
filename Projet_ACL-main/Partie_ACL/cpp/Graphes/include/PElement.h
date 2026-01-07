@@ -3,59 +3,83 @@
 
 #include <iostream>
 
+/**
+ * @brief Classe représentant un élément d'une liste chaînée.
+ * 
+ * @tparam T - Type des données stockées dans l'élément.
+ */
 template <typename T>
 class PElement {
 public:
     T v;                       // Donnée stockée (pointeur, valeur, etc.).
     PElement<T>* suivant;      // Pointeur vers l'élément suivant de la liste.
 
-    // Constructeur : permet d'insérer facilement en tête de liste.
+    /**
+     * @brief Constructeur : permet d'insérer facilement en tête de liste.
+     * 
+     * @param valeur - Valeur à stocker dans l'élément.
+     * @param next - Pointeur vers l'élément suivant (par défaut nullptr).
+     */
     PElement(const T& valeur, PElement<T>* next = nullptr) 
         : v(valeur), suivant(next) {}
 
-    // Destructeur : libère récursivement toute la liste.
+    /**
+     * @brief Destructeur : libère récursivement toute la liste.
+     */
     ~PElement() {
         if (suivant) delete suivant;  // Recursively delete the chain
     }
 
     /**
-     * Opérateur << pour afficher une liste complète.
-     * Très utile pour vérifier le contenu du graphe.
+     * @brief Surcharge de l'opérateur << pour afficher une liste complète.
      */
     friend std::ostream& operator<<(std::ostream& os, const PElement<T>& liste) {
-    const PElement<T>* courant = &liste;
-    while (courant != nullptr) {
-        // On affiche la valeur directement
-        os << courant->v;
-        
-        courant = courant->suivant;
-        if (courant != nullptr) os << " -> ";
+        const PElement<T>* courant = &liste;
+        while (courant != nullptr) {
+            // On affiche la valeur directement
+            os << courant->v;
+            
+            courant = courant->suivant;
+            if (courant != nullptr) os << " -> ";
+        }
+        return os;
     }
-    return os;
-}
 };
 
-// Spécialisation pour les pointeurs : déréférence automatiquement
+/**
+ * @brief Spécialisation de PElement pour les pointeurs.
+ * 
+ * @tparam T - Type des données pointées.
+ */
 template <typename T>
 class PElement<T*> {
 public:
     T* v;                      // Pointeur vers la donnée.
     PElement<T*>* suivant;     // Pointeur vers l'élément suivant.
 
-    // Constructeur
+    /**
+     * @brief Constructeur : permet d'insérer facilement en tête de liste.
+     * 
+     * @param valeur - Pointeur à stocker dans l'élément.
+     * @param next - Pointeur vers l'élément suivant (par défaut nullptr).
+     */
     PElement(T* const& valeur, PElement<T*>* next = nullptr) 
         : v(valeur), suivant(next) {}
 
-    // Destructeur
+    /**
+     * @brief Destructeur : libère récursivement toute la liste.
+     */
     ~PElement() {
         if (suivant) delete suivant;
     }
 
-    // Opérateur << qui déréférence automatiquement
+    /**
+     * @brief Surcharge de l'opérateur << pour afficher une liste complète de pointeurs.
+     */
     friend std::ostream& operator<<(std::ostream& os, const PElement<T*>& liste) {
         const PElement<T*>* courant = &liste;
         while (courant != nullptr) {
-            os << *courant->v;  // Déréférence le pointeur
+            os << *courant->v;  // Déréférence le pointeur.
             
             courant = courant->suivant;
             if (courant != nullptr) os << " -> ";

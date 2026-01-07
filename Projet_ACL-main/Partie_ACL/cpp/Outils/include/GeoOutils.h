@@ -3,7 +3,7 @@
 #include <tgmath.h>
 
 /**
- * Classe utilitaire pour les calculs géographiques.
+ * @brief Classe utilitaire pour les calculs géographiques.
  * En ACL, on utilise souvent des méthodes statiques pour les "boîtes à outils".
  */
 class GeoOutils {
@@ -43,7 +43,11 @@ public:
     }
 
 private:
-
+    /**
+     * Convertit des degrés en radians.
+     * @param degre Angle en degrés
+     * @return Angle en radians
+     */
     static double degreVersRadiant(double degre) {
         return degre * (PI / 180.0);
     }

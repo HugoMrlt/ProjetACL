@@ -13,10 +13,16 @@
 using namespace std;
 using json = nlohmann::json;
 
+/**
+ * @brief Utilitaires pour la manipulation de fichiers JSON.
+ */
 class JsonOutils {
 public:
     /**
-     * Lit un fichier JSON et retourne un vecteur d'objets Ville
+     * @brief Lit un fichier JSON et retourne un vecteur d'objets Ville
+     * 
+     * @param cheminFichier - Chemin vers le fichier JSON.
+     * @return vector<Ville> 
      */
     static vector<Ville> chargerDepuisFichier(const string& cheminFichier) {
         vector<Ville> listeVilles;

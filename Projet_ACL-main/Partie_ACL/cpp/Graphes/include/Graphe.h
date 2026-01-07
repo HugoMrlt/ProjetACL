@@ -9,6 +9,12 @@
 #include <utility>
 #include <map>
 
+/**
+ * @brief Classe représentant un graphe.
+ * 
+ * @tparam S - Type des données associées aux arêtes.
+ * @tparam T - Type des données associées aux sommets.
+ */
 template <typename S, typename T>
 class Graphe {
 public:
@@ -16,36 +22,129 @@ public:
     PElement<Arete<S, T>*>* lAretes;    // Liste des arêtes.
     int prochaineClef;                  // Générateur de clefs primaires.
 
+    /**
+     * @brief Constructeur par défaut.
+     */
     Graphe();
+
+    /**
+     * @brief Constructeur de copie.
+     * 
+     * @param other - Graphe à copier.
+     */
     Graphe(const Graphe& other);
+
+    /**
+     * @brief Destructeur.
+     * Libère toute la mémoire allouée pour les sommets et les arêtes.
+     */
     virtual ~Graphe();
 
-    // Création d'éléments
+    /*-------------Création d'éléments-------------*/
+
+    /**
+     * @brief Crée un sommet dans le graphe.
+     * 
+     * @param info - Informations associées au sommet.
+     * @return Sommet<T>* - Pointeur vers le nouveau sommet.
+     */
     Sommet<T>* creeSommet(const T& info);
+
+    /**
+     * @brief Crée une arête dans le graphe.
+     * 
+     * @param info - Informations associées à l'arête.
+     * @param debut - Pointeur vers le sommet de début.
+     * @param fin - Pointeur vers le sommet de fin.
+     * @return Arete<S, T>* - Pointeur vers la nouvelle arête.
+     */
     Arete<S, T>* creeArete(const S& info, Sommet<T>* debut, Sommet<T>* fin);
 
-    // Getters
+    /*---------------Getters---------------*/
+
+    /**
+     * @brief Récupère tous les sommets du graphe.
+     * 
+     * @return std::vector<Sommet<T>*> - Vecteur des pointeurs sur les sommets.
+     */
     std::vector<Sommet<T>*> getSommets() const;
+
+    /**
+     * @brief Récupère toutes les arêtes du graphe.
+     * 
+     * @return std::vector<Arete<S, T>*>* - Vecteur des pointeurs sur les arêtes.
+     */
     std::vector<Arete<S, T>*>* getAretes() const;
 
-    // Méthodes d'accès et topologie
+    /*-------------Méthodes d'accès et topologie-------------*/
+
+    /**
+     * @brief Récupère le nombre de sommets du graphe.
+     * 
+     * @return int - Nombre de sommets.
+     */
     int nombreSommets() const;
+
+    /**
+     * @brief Récupère le nombre d'arêtes du graphe.
+     * 
+     * @return int - Nombre d'arêtes.
+     */
     int nombreAretes() const;
+
+    /**
+     * @brief Récupère les voisins d'un sommet donné.
+     * 
+     * @param s - Pointeur vers le sommet dont on veut les voisins.
+     * @return PElement<Sommet<T>*>* - Liste des voisins.
+     */
     PElement<Sommet<T>*>* voisins(const Sommet<T>* s) const;
+
+    /**
+     * @brief Récupère les arêtes adjacentes à un sommet donné.
+     * 
+     * @param s - Pointeur vers le sommet dont on veut les arêtes adjacentes.
+     * @return PElement<Arete<S, T>*>* - Liste des arêtes adjacentes.
+     */
     PElement<Arete<S, T>*>* aretesAdjacentes(const Sommet<T>* s) const;
+
+    /**
+     * @brief Récupère les adjacences d'un sommet donné.
+     * 
+     * @param s - Pointeur vers le sommet dont on veut les adjacences.
+     * @return PElement<std::pair<Sommet<T>*, Arete<S, T>*>>* - Liste des adjacences.
+     */
     PElement<std::pair<Sommet<T>*, Arete<S, T>*>>* adjacences(const Sommet<T>* s) const;
+
+    /**
+     * @brief Récupère une arête entre deux sommets donnés.
+     * 
+     * @param s1 - Pointeur vers le sommet de début.
+     * @param s2 - Pointeur vers le sommet de fin.
+     * @return Arete<S, T>* - Pointeur vers l'arête trouvée, ou nullptr si non trouvée.
+     */
     Arete<S, T>* getAreteParSommets(const Sommet<T>* s1, const Sommet<T>* s2) const;
 
-    // Affichage
+    /*-------------Surcharge d'opérateurs-------------*/
+
+    /**
+     * @brief Surcharge de l'opérateur de conversion en chaîne de caractères.
+     * 
+     * @return std::string - Représentation textuelle du graphe.
+     */
     operator std::string() const;
+
+    /**
+     * @brief Surcharge de l'opérateur d'affectation.
+     * 
+     * @param other - Graphe à copier.
+     * @return Graphe<S, T>& - Référence sur le graphe courant.
+     */
     Graphe<S, T>& operator=(const Graphe<S, T>& other);
-    friend std::ostream& operator<<(std::ostream& os, const Graphe<S, T>& g) {
-        os << (std::string)g;
-        return os;
-    }
+
 };
 
-// Template implementations
+/*-------------Implémentation des méthodes-------------*/
 template <typename S, typename T>
 Graphe<S, T>::Graphe() : lSommets(nullptr), lAretes(nullptr), prochaineClef(0) {}
 

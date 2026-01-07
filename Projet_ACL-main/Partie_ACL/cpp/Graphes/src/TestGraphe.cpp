@@ -1,57 +1,55 @@
 #include <iostream>
-#include <string>
+#include <vector>
 #include "Graphe.h"
-
-using namespace std;
+#include "Ville.h"
+#include "VisiteurAffichage.h"
 
 int main() {
-    char ch;
-    Graphe<char, string> g2; // Graphe vide initialement.
-    {
-        Graphe<char, string> g1; // Création à vide.
+    std::cout << "=== Test de la classe Graphe avec Visitor ===" << std::endl;
 
-        Sommet<string> *s0, *s1, *s2, *s3;
+    // 1. Création du graphe (Poids: double, Donnée Sommet: Ville)
+    Graphe<double, Ville> monReseau;
+    VisiteurAffichage monAfficheur;
 
-        // Insertion des sommets
-        s0 = g1.creeSommet("King's Landing");
-        s1 = g1.creeSommet("Winterfell");
-        s2 = g1.creeSommet("DragonStone");
-        s3 = g1.creeSommet("The wall");
+    // 2. Ajout de sommets (Villes)
+    Sommet<Ville>* v1 = monReseau.creeSommet(Ville("Montreal", 45.5, -73.5));
+    Sommet<Ville>* v2 = monReseau.creeSommet(Ville("Quebec", 46.8, -71.2));
+    Sommet<Ville>* v3 = monReseau.creeSommet(Ville("Sherbrooke", 45.4, -71.8));
 
-        // Connexion des sommets
-        g1.creeArete('a', s1, s0);
-        g1.creeArete('b', s2, s1);
-        g1.creeArete('c', s3, s2);
-        g1.creeArete('d', s3, s1);
+    // 3. Ajout d'arêtes (Routes avec distances)
+    monReseau.creeArete(250.0, v1, v2); // Montreal <-> Quebec
+    monReseau.creeArete(160.0, v1, v3); // Montreal <-> Sherbrooke
 
-        cout << "Le graphe cree g1 est :" << endl << g1 << endl;
-        
-        cout << "Nombre de sommets : " << g1.nombreSommets() << endl;
-        cout << "Nombre d'aretes : " << g1.nombreAretes() << endl;
-
-        // Test des voisins de s0
-        PElement<Sommet<string>*>* l0 = g1.voisins(s0);
-        cout << "Voisins de s0 : " << endl;
-        PElement<Sommet<string>*>* tmp = l0;
-        while(tmp) { cout << " - " << tmp->v->v << endl; tmp = tmp->suivant; }
-        delete l0;
-
-        // Test des aretes adjacentes de s1
-        PElement<Arete<char, string>*>* adj1 = g1.aretesAdjacentes(s1);
-        cout << "Aretes adjacentes a s1 : " << endl;
-        PElement<Arete<char, string>*>* tmpA = adj1;
-        while(tmpA) { cout << " - Arete clef " << tmpA->v->clef << endl; tmpA = tmpA->suivant; }
-        delete adj1;
-
-        // Recherche d'une arete spécifique
-        Arete<char, string>* a = g1.getAreteParSommets(s1, s3);
-        if(a) cout << "L'arete joignant s1 et s3 est : " << *a << endl;
-
-        g2 = g1; // Utilisation du constructeur de copie.
+    // 4. Affichage du contenu via le Visiteur
+    std::cout << "\n--- Liste des Sommets du Graphe ---" << std::endl;
+    std::vector<Sommet<Ville>*> sommets = monReseau.getSommets();
+    for (auto s : sommets) {
+        s->accept(&monAfficheur);
     }
 
-    cout <<"le graphe créé g2 comme copie de g1 est :"<< endl << g2 << endl;
-    cin >> ch;
+    std::cout << "\n--- Liste des Aretes du Graphe ---" << std::endl;
+    std::vector<Arete<double, Ville>*>* aretes = monReseau.getAretes();
+    for (auto a : *aretes) {
+        a->accept(&monAfficheur);
+    }
+    delete aretes; // Car getAretes() retourne un pointeur new std::vector
 
-    return 0; 
+    // 5. Test de topologie : Voisins de Montreal
+    std::cout << "\nVoisins de " << v1->v.getName() << ":" << std::endl;
+    PElement<Sommet<Ville>*>* listeVoisins = monReseau.voisins(v1);
+    PElement<Sommet<Ville>*>* curr = listeVoisins;
+    
+    while (curr) {
+        // On utilise aussi le visiteur pour les voisins
+        curr->v->accept(&monAfficheur);
+        curr = curr->suivant;
+    }
+
+    // Nettoyage de la liste temporaire des voisins (PElement)
+    // Note: Dans votre logique, PElement n'a pas forcément de delete cascade ici
+    // Il faudrait s'assurer de ne pas fuir la mémoire de la liste chaînée de voisins.
+
+    std::cout << "\n=== Fin du Test Graphe ===" << std::endl;
+
+    return 0;
 }

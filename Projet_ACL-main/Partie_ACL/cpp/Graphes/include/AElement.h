@@ -1,27 +1,39 @@
 #ifndef AELEMENT_H
 #define AELEMENT_H
 
-#include <iostream>
-#include <string>
+/**
+ * @brief Interface de visiteur pour les éléments du graphe.
+ * 
+ * @tparam S - Type des sommets.
+ * @tparam T - Type des données des sommets.
+ */
+template <typename S, typename T> class IVisiteur;
+class Ville;
 
+/**
+ * @brief Classe abstraite représentant un élément du graphe.
+ */
 class AElement {
 public:
     // Attribut public servant de clef primaire.
     int clef;
 
-    // Constructeur.
+    /**
+     * @brief Constructeur de AElement.
+     * 
+     * @param c - Valeur de la clef primaire.
+     */
     AElement(int c = 0) : clef(c) {}
 
-    // Opérateur de conversion en string.
-    operator std::string() const {
-        return std::to_string(clef);
-    }
+    virtual ~AElement() {};
 
-    // Opérateur << d'écriture sur un flux.
-    friend std::ostream& operator<<(std::ostream& os, const AElement& obj) {
-        os << (std::string)obj; 
-        return os;
-    }
+    //DP Visitor
+    /**
+     * @brief Accepte un visiteur.
+     * 
+     * @param v - Visiteur à accepter.
+     */
+    virtual void accept(IVisiteur<double, Ville>* v) = 0;
 };
 
 #endif

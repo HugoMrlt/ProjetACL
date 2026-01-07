@@ -5,6 +5,12 @@
 #include <filesystem>
 #include <stdexcept>
 
+/**
+ * @brief Trouve le chemin absolu vers un fichier dans le dossier Assets.
+ * 
+ * @param cheminRelatif - Chemin relatif du fichier à chercher.
+ * @return std::string - Chemin absolu du fichier trouvé.
+ */
 inline std::string trouverCheminAssets(const std::string& cheminRelatif) {
     std::vector<std::string> basesPossibles = {
         "Assets/",

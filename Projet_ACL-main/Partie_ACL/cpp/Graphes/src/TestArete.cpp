@@ -1,42 +1,35 @@
 #include <iostream>
+#include "Ville.h"
+#include "Sommet.h"
 #include "Arete.h"
+#include "VisiteurAffichage.h"
 
 int main() {
-    // Création de deux sommets.
-    Sommet<std::string> s1(1, "Station A");
-    Sommet<std::string> s2(2, "Station B");
+    // 1. Initialisation des sommets (avec des adresses pour les pointeurs)
+    Ville v1("Montreal", 45.5, -73.5);
+    Ville v2("Quebec", 46.8, -71.2);
 
-    // Affichage des sommets initiaux.
-    std::cout << "Avant création de l'arête :" << std::endl;
-    std::cout << s1 << std::endl;
-    std::cout << s2 << std::endl;
+    Sommet<Ville> s1(1, v1);
+    Sommet<Ville> s2(2, v2);
 
-    // Création d'une arête entre les deux sommets.
-    Arete<double, std::string> a1(101, 5.0, &s1, &s2);
+    // 2. Correction de l'instanciation de l'Arete
+    // Signature : Arete(int clef, const S& v, Sommet<T>* d, Sommet<T>* f)
+    // Ici S est double (le poids) et T est Ville.
+    Arete<double, Ville> route(101, 255.5, &s1, &s2);
 
-    // Affichage de l'arête créée.
-    std::cout << "Arête créée :" << std::endl;
-    std::cout << a1 << std::endl;
+    // 3. Test du visiteur
+    VisiteurAffichage visiteur;
+    
+    std::cout << "--- Test du Visiteur ---" << std::endl;
+    
+    std::cout << "Sommet 1 : ";
+    s1.accept(&visiteur);
 
-    // Affichage des sommets après création de l'arête (degrés mis à jour).
-    std::cout << "Après création de l'arête :" << std::endl;
-    std::cout << s1 << std::endl;
-    std::cout << s2 << std::endl;
+    std::cout << "Sommet 2 : ";
+    s2.accept(&visiteur);
 
-    // Suppression de l'arête (destructeur appelé automatiquement ici).
-    {
-        Arete<double, std::string> a2(102, 10.0, &s1, &s2);
-        std::cout << "Deuxième arête créée :" << std::endl;
-        std::cout << a2 << std::endl;
-        std::cout << "Après création de la deuxième arête :" << std::endl;
-        std::cout << s1 << std::endl;
-        std::cout << s2 << std::endl;
-    } // a2 est détruit ici.
-
-    // Affichage des sommets après destruction de la deuxième arête (degrés mis à jour).
-    std::cout << "Après destruction de la deuxième arête :" << std::endl;
-    std::cout << s1 << std::endl;
-    std::cout << s2 << std::endl;
+    std::cout << "Arete : ";
+    route.accept(&visiteur);
 
     return 0;
 }

@@ -10,9 +10,17 @@
 
 using namespace std;
 
-
+/**
+ * @brief Utilitaires pour la manipulation de fichiers CSV.
+ */
 class CsvOutils {
 public:
+    /**
+     * @brief Supprime les espaces en début et fin de chaîne.
+     * 
+     * @param str - Chaîne à nettoyer.
+     * @return string - Chaîne nettoyée.
+     */
     static string trim(const string& str) {
         size_t first = str.find_first_not_of(" \t\r\n");
         if (first == string::npos) return "";
@@ -20,6 +28,12 @@ public:
         return str.substr(first, (last - first + 1));
     }
 
+    /**
+     * @brief Charge les types de route entre villes depuis un fichier CSV.
+     * 
+     * @param cheminFichier - Chemin vers le fichier CSV.
+     * @return map<string, map<string, string>> - Structure contenant les types de route entre villes.
+     */
     static map<string, map<string, string>> chargerTypesRoute(const string& cheminFichier) {
         map<string, map<string, string>> types;
         ifstream fichier(cheminFichier);
@@ -49,6 +63,14 @@ public:
         return types;
     }
 
+    /**
+     * @brief Récupère le type de route entre deux villes.
+     * 
+     * @param types - Structure contenant les types de route entre villes.
+     * @param villeA - Nom de la première ville.
+     * @param villeB - Nom de la deuxième ville.
+     * @return string - Type de route entre les deux villes.
+     */
     static string getTypeRoute(const map<string, map<string, string>>& types, const string& villeA, const string& villeB) {
         string vA = trim(villeA);
         string vB = trim(villeB);
