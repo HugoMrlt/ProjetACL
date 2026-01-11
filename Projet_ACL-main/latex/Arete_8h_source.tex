@@ -1,0 +1,64 @@
+\doxysection{Arete.\+h}
+\hypertarget{Arete_8h_source}{}\label{Arete_8h_source}\index{Partie\_ACL/cpp/Graphes/include/Arete.h@{Partie\_ACL/cpp/Graphes/include/Arete.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ ARETE\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ ARETE\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}GElement.h"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}Sommet.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}IVisiteur.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structRoute}{Route}}\ \{}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{int}\ poids;\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Distance\ en\ km}}
+\DoxyCodeLine{00018\ \ \ \ \ std::string\ type;\ \ \ \ \textcolor{comment}{//\ "{}Autoroute"{},\ "{}Nationale"{},\ etc.}}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{int}\ camionId;\ \ \ \ \ \ \ \ \textcolor{comment}{//\ ID\ du\ camion\ qui\ l'emprunte}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{comment}{//\ Petit\ constructeur\ pratique}}
+\DoxyCodeLine{00022\ \ \ \ \ \mbox{\hyperlink{structRoute}{Route}}(\textcolor{keywordtype}{int}\ p\ =\ 0,\ std::string\ t\ =\ \textcolor{stringliteral}{"{}"{}},\ \textcolor{keywordtype}{int}\ c\ =\ -\/1)}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ :\ poids(p),\ type(t),\ camionId(c)\ \{\}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{comment}{//\ Surcharge\ pour\ l'affichage\ (utilisé\ par\ l'opérateur\ <<\ de\ GElement)}}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{friend}\ std::ostream\&\ operator<<(std::ostream\&\ os,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structRoute}{Route}}\&\ r)\ \{}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ os\ <<\ r.type\ <<\ \textcolor{stringliteral}{"{}\ ("{}}\ <<\ r.poids\ <<\ \textcolor{stringliteral}{"{}km,\ Camion:"{}}\ <<\ r.camionId\ <<\ \textcolor{stringliteral}{"{})"{}};}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ os;}
+\DoxyCodeLine{00029\ \ \ \ \ \}}
+\DoxyCodeLine{00030\ \};}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00038\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ S,\ \textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00039\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classArete}{Arete}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classGElement}{GElement}}<S>\ \{}
+\DoxyCodeLine{00040\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{comment}{//\ Attributs\ publics\ :\ pointeurs\ sur\ les\ sommets\ extrémités.}}
+\DoxyCodeLine{00042\ \ \ \ \ \mbox{\hyperlink{classSommet}{Sommet<T>}}*\ debut;}
+\DoxyCodeLine{00043\ \ \ \ \ \mbox{\hyperlink{classSommet}{Sommet<T>}}*\ fin;}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00055\ \ \ \ \ \mbox{\hyperlink{classArete_ab35fe895b57dbd05db0ad8764525478c}{Arete}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ clef,\ \textcolor{keyword}{const}\ S\&\ v,\ \mbox{\hyperlink{classSommet}{Sommet<T>}}*\ d,\ \mbox{\hyperlink{classSommet}{Sommet<T>}}*\ f)}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classGElement}{GElement}}<S>(clef,\ v),\ debut(d),\ fin(f)\ \{}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (debut)\ debut-\/>degre++;\ \textcolor{comment}{//\ Incrémente\ le\ degré\ du\ sommet\ de\ début.}}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (fin)\ fin-\/>degre++;\ \ \ \ \ \textcolor{comment}{//\ Incrémente\ le\ degré\ du\ sommet\ de\ fin.}}
+\DoxyCodeLine{00059\ \ \ \ \ \}}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classArete_a4b277bf973b23725bc3ba90175e9b2a5}{\string~Arete}}()\ \{}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (debut)\ debut-\/>degre-\/-\/;}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (fin)\ fin-\/>degre-\/-\/;}
+\DoxyCodeLine{00068\ \ \ \ \ \}}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classArete_a3ad238ea344eb0fc755f224e08f7554e}{estEgal}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classSommet}{Sommet<T>}}*\ s1,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classSommet}{Sommet<T>}}*\ s2)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (debut\ ==\ s1\ \&\&\ fin\ ==\ s2)\ ||\ (debut\ ==\ s2\ \&\&\ fin\ ==\ s1);}
+\DoxyCodeLine{00081\ \ \ \ \ \}}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classArete_a7ad0e689c75b8f3dc21c5b68b7f72a9a}{accept}}(\mbox{\hyperlink{classIVisiteur}{IVisiteur<double,\ Ville>}}*\ v)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_same\_v<S,\ double>)\ \{}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ v-\/>\mbox{\hyperlink{classIVisiteur_a91676ca7854371eeba508971db14a0d3}{visiterArete}}((\mbox{\hyperlink{classArete}{Arete<double,\ Ville>}}*)\textcolor{keyword}{this});}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00094\ \ \ \ \ \}}
+\DoxyCodeLine{00095\ \};}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

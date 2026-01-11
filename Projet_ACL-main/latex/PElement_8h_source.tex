@@ -1,0 +1,63 @@
+\doxysection{PElement.\+h}
+\hypertarget{PElement_8h_source}{}\label{PElement_8h_source}\index{Partie\_ACL/cpp/Graphes/include/PElement.h@{Partie\_ACL/cpp/Graphes/include/PElement.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PELEMENT\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PELEMENT\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00012\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classPElement}{PElement}}\ \{}
+\DoxyCodeLine{00013\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00014\ \ \ \ \ \mbox{\hyperlink{classSommet}{T}}\ v;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Donnée\ stockée\ (pointeur,\ valeur,\ etc.).}}
+\DoxyCodeLine{00015\ \ \ \ \ \mbox{\hyperlink{classSommet}{PElement<T>}}*\ suivant;\ \ \ \ \ \ \textcolor{comment}{//\ Pointeur\ vers\ l'élément\ suivant\ de\ la\ liste.}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{classPElement_a832f26ada47e02bfd5fa4abb655d4c17}{PElement}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classSommet}{T}}\&\ \mbox{\hyperlink{classSommet}{valeur}},\ \mbox{\hyperlink{classSommet}{PElement<T>}}*\ \mbox{\hyperlink{classSommet}{next}}\ =\ \textcolor{keyword}{nullptr})\ }
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ :\ v(\mbox{\hyperlink{classSommet}{valeur}}),\ suivant(\mbox{\hyperlink{classSommet}{next}})\ \{\}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00029\ \ \ \ \ \mbox{\hyperlink{classPElement_a27e0180e561c807d4ba46dbd862a4ae9}{\string~PElement}}()\ \{}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (suivant)\ \textcolor{keyword}{delete}\ suivant;\ \ \textcolor{comment}{//\ Recursively\ delete\ the\ chain}}
+\DoxyCodeLine{00031\ \ \ \ \ \}}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keyword}{friend}\ std::ostream\&\ \mbox{\hyperlink{classPElement_a8bdbb7fd1baa86176fe531fa88e53e4d}{operator<<}}(std::ostream\&\ \mbox{\hyperlink{classSommet}{os}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classSommet}{PElement<T>}}\&\ \mbox{\hyperlink{classSommet}{liste}})\ \{}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classSommet}{PElement<T>}}*\ \mbox{\hyperlink{classSommet}{courant}}\ =\ \&\mbox{\hyperlink{classSommet}{liste}};}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (\mbox{\hyperlink{classSommet}{courant}}\ !=\ \textcolor{keyword}{nullptr})\ \{}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ On\ affiche\ la\ valeur\ directement}}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSommet}{os}}\ <<\ \mbox{\hyperlink{classSommet}{courant}}-\/>v;}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSommet}{courant}}\ =\ \mbox{\hyperlink{classSommet}{courant}}-\/>suivant;}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classSommet}{courant}}\ !=\ \textcolor{keyword}{nullptr})\ \mbox{\hyperlink{classSommet}{os}}\ <<\ \textcolor{stringliteral}{"{}\ -\/>\ "{}};}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classSommet}{os}};}
+\DoxyCodeLine{00046\ \ \ \ \ \}}
+\DoxyCodeLine{00047\ \};}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00054\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00055\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classPElement}{PElement}}<\mbox{\hyperlink{classSommet}{T}}*>\ \{}
+\DoxyCodeLine{00056\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00057\ \ \ \ \ \mbox{\hyperlink{classSommet}{T}}*\ v;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Pointeur\ vers\ la\ donnée.}}
+\DoxyCodeLine{00058\ \ \ \ \ \mbox{\hyperlink{classSommet}{PElement<T*>}}*\ suivant;\ \ \ \ \ \textcolor{comment}{//\ Pointeur\ vers\ l'élément\ suivant.}}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00066\ \ \ \ \ \mbox{\hyperlink{classPElement_3_01T_01_5_01_4_a1dd032c4c0beb6de0f3f4a6702ac38c6}{PElement}}(\mbox{\hyperlink{classSommet}{T}}*\ \textcolor{keyword}{const}\&\ \mbox{\hyperlink{classSommet}{valeur}},\ \mbox{\hyperlink{classSommet}{PElement<T*>}}*\ \mbox{\hyperlink{classSommet}{next}}\ =\ \textcolor{keyword}{nullptr})\ }
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ :\ v(\mbox{\hyperlink{classSommet}{valeur}}),\ suivant(\mbox{\hyperlink{classSommet}{next}})\ \{\}}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00072\ \ \ \ \ \mbox{\hyperlink{classPElement_3_01T_01_5_01_4_ab257b15fd557b4570bb275c5108f74c2}{\string~PElement}}()\ \{}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (suivant)\ \textcolor{keyword}{delete}\ suivant;}
+\DoxyCodeLine{00074\ \ \ \ \ \}}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keyword}{friend}\ std::ostream\&\ \mbox{\hyperlink{classPElement_3_01T_01_5_01_4_a5201533fabb0a39fbc719908396580b8}{operator<<}}(std::ostream\&\ \mbox{\hyperlink{classSommet}{os}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classSommet}{PElement<T*>}}\&\ \mbox{\hyperlink{classSommet}{liste}})\ \{}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classSommet}{PElement<T*>}}*\ \mbox{\hyperlink{classSommet}{courant}}\ =\ \&\mbox{\hyperlink{classSommet}{liste}};}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (\mbox{\hyperlink{classSommet}{courant}}\ !=\ \textcolor{keyword}{nullptr})\ \{}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSommet}{os}}\ <<\ *\mbox{\hyperlink{classSommet}{courant}}-\/>v;\ \ \textcolor{comment}{//\ Déréférence\ le\ pointeur.}}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSommet}{courant}}\ =\ \mbox{\hyperlink{classSommet}{courant}}-\/>suivant;}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classSommet}{courant}}\ !=\ \textcolor{keyword}{nullptr})\ \mbox{\hyperlink{classSommet}{os}}\ <<\ \textcolor{stringliteral}{"{}\ -\/>\ "{}};}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classSommet}{os}};}
+\DoxyCodeLine{00088\ \ \ \ \ \}}
+\DoxyCodeLine{00089\ \};}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

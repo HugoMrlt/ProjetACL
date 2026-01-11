@@ -1,0 +1,75 @@
+\doxysection{Csv\+Outils.\+h}
+\hypertarget{CsvOutils_8h_source}{}\label{CsvOutils_8h_source}\index{Partie\_ACL/cpp/Outils/include/CsvOutils.h@{Partie\_ACL/cpp/Outils/include/CsvOutils.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ CSVOUTILS\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ CSVOUTILS\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <map>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <fstream>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <sstream>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <stdexcept>}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classCsvOutils}{CsvOutils}}\ \{}
+\DoxyCodeLine{00017\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{classCsvOutils_af319fe31246f49d9de3d9799509a5cf6}{trim}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ \mbox{\hyperlink{classSommet}{str}})\ \{}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classSommet}{first}}\ =\ \mbox{\hyperlink{classSommet}{str}}.find\_first\_not\_of(\textcolor{stringliteral}{"{}\ \(\backslash\)t\(\backslash\)r\(\backslash\)n"{}});}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classSommet}{first}}\ ==\ string::npos)\ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classSommet}{last}}\ =\ \mbox{\hyperlink{classSommet}{str}}.find\_last\_not\_of(\textcolor{stringliteral}{"{}\ \(\backslash\)t\(\backslash\)r\(\backslash\)n"{}});}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classSommet}{str}}.substr(\mbox{\hyperlink{classSommet}{first}},\ (\mbox{\hyperlink{classSommet}{last}}\ -\/\ \mbox{\hyperlink{classSommet}{first}}\ +\ 1));}
+\DoxyCodeLine{00029\ \ \ \ \ \}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classSommet}{map<string,\ map<string,\ string>}}>\ \mbox{\hyperlink{classCsvOutils_a5471c2aa4cb8c69ff46fa091ad0cd930}{chargerTypesRoute}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ \mbox{\hyperlink{classSommet}{cheminFichier}})\ \{}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSommet}{map<string,\ map<string,\ string>}}>\ \mbox{\hyperlink{classSommet}{types}};}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSommet}{ifstream}}\ \mbox{\hyperlink{classSommet}{fichier}}(\mbox{\hyperlink{classSommet}{cheminFichier}});}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classSommet}{fichier}}.is\_open())\ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classSommet}{runtime\_error}}(\textcolor{stringliteral}{"{}Impossible\ d'ouvrir\ le\ fichier\ CSV"{}});}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{classSommet}{ligne}};}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSommet}{vector<string>}}\ \mbox{\hyperlink{classSommet}{villes}};}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classSommet}{getline}}(\mbox{\hyperlink{classSommet}{fichier}},\ \mbox{\hyperlink{classSommet}{ligne}}))\ \{}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSommet}{stringstream}}\ \mbox{\hyperlink{classSommet}{ss}}(\mbox{\hyperlink{classSommet}{ligne}});}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{classSommet}{cell}};}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSommet}{getline}}(\mbox{\hyperlink{classSommet}{ss}},\ \mbox{\hyperlink{classSommet}{cell}},\ \textcolor{charliteral}{';'});}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (\mbox{\hyperlink{classSommet}{getline}}(\mbox{\hyperlink{classSommet}{ss}},\ \mbox{\hyperlink{classSommet}{cell}},\ \textcolor{charliteral}{';'}))\ \mbox{\hyperlink{classSommet}{villes}}.push\_back(\mbox{\hyperlink{classCsvOutils_af319fe31246f49d9de3d9799509a5cf6}{trim}}(\mbox{\hyperlink{classSommet}{cell}}));}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (\mbox{\hyperlink{classSommet}{getline}}(\mbox{\hyperlink{classSommet}{fichier}},\ \mbox{\hyperlink{classSommet}{ligne}}))\ \{}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSommet}{stringstream}}\ \mbox{\hyperlink{classSommet}{ss}}(\mbox{\hyperlink{classSommet}{ligne}});}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{classSommet}{villeA}};}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSommet}{getline}}(\mbox{\hyperlink{classSommet}{ss}},\ \mbox{\hyperlink{classSommet}{villeA}},\ \textcolor{charliteral}{';'});}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSommet}{villeA}}\ =\ \mbox{\hyperlink{classCsvOutils_af319fe31246f49d9de3d9799509a5cf6}{trim}}(\mbox{\hyperlink{classSommet}{villeA}});}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classSommet}{i}}\ =\ 0;\ \mbox{\hyperlink{classSommet}{i}}\ <\ \mbox{\hyperlink{classSommet}{villes}}.size();\ ++\mbox{\hyperlink{classSommet}{i}})\ \{}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ type;}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSommet}{getline}}(\mbox{\hyperlink{classSommet}{ss}},\ type,\ \textcolor{charliteral}{';'});}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ type\ =\ \mbox{\hyperlink{classCsvOutils_af319fe31246f49d9de3d9799509a5cf6}{trim}}(type);}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!type.empty())\ \mbox{\hyperlink{classSommet}{types}}[\mbox{\hyperlink{classSommet}{villeA}}][\mbox{\hyperlink{classSommet}{villes}}[\mbox{\hyperlink{classSommet}{i}}]]\ =\ type;}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classSommet}{types}};}
+\DoxyCodeLine{00064\ \ \ \ \ \}}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{classCsvOutils_aee1ab4d16234a6436af642d4dcf69ab6}{getTypeRoute}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classSommet}{map}}<\textcolor{keywordtype}{string},\ \mbox{\hyperlink{classSommet}{map<string,\ string>}}>\&\ \mbox{\hyperlink{classSommet}{types}},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ \mbox{\hyperlink{classSommet}{villeA}},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ \mbox{\hyperlink{classSommet}{villeB}})\ \{}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{classSommet}{vA}}\ =\ \mbox{\hyperlink{classCsvOutils_af319fe31246f49d9de3d9799509a5cf6}{trim}}(\mbox{\hyperlink{classSommet}{villeA}});}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{classSommet}{vB}}\ =\ \mbox{\hyperlink{classCsvOutils_af319fe31246f49d9de3d9799509a5cf6}{trim}}(\mbox{\hyperlink{classSommet}{villeB}});}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classSommet}{itA}}\ =\ \mbox{\hyperlink{classSommet}{types}}.find(\mbox{\hyperlink{classSommet}{vA}});}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classSommet}{itA}}\ !=\ \mbox{\hyperlink{classSommet}{types}}.end())\ \{}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classSommet}{itB}}\ =\ \mbox{\hyperlink{classSommet}{itA}}-\/>second.find(\mbox{\hyperlink{classSommet}{vB}});}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classSommet}{itB}}\ !=\ \mbox{\hyperlink{classSommet}{itA}}-\/>second.end())\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classSommet}{itB}}-\/>second;}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classSommet}{itB}}\ =\ \mbox{\hyperlink{classSommet}{types}}.find(\mbox{\hyperlink{classSommet}{vB}});}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classSommet}{itB}}\ !=\ \mbox{\hyperlink{classSommet}{types}}.end())\ \{}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classSommet}{itA2}}\ =\ \mbox{\hyperlink{classSommet}{itB}}-\/>second.find(\mbox{\hyperlink{classSommet}{vA}});}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classSommet}{itA2}}\ !=\ \mbox{\hyperlink{classSommet}{itB}}-\/>second.end())\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classSommet}{itA2}}-\/>second;}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}Aucun\ Type"{}};}
+\DoxyCodeLine{00089\ \ \ \ \ \}}
+\DoxyCodeLine{00090\ \};}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ CSVOUTILS\_H}}
+
+\end{DoxyCode}

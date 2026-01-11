@@ -1,0 +1,188 @@
+\doxysection{Ville Class Reference}
+\hypertarget{classVille}{}\label{classVille}\index{Ville@{Ville}}
+
+
+Représente une ville en fonction de son nom et ses coordonnées géographiques.  
+
+
+
+
+{\ttfamily \#include $<$Ville.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classVille_a6fbc4da73442b8f6b4ad9a745cf67ffe}{Ville}} (\mbox{\hyperlink{classSommet}{const}} string \&name, \mbox{\hyperlink{classSommet}{double}} latitude, \mbox{\hyperlink{classSommet}{double}} longitude)
+\begin{DoxyCompactList}\small\item\em Constructeur de \doxylink{classVille}{Ville}. \end{DoxyCompactList}\item 
+\Hypertarget{classVille_a97015113d66d79a1534a3dc0471cf0c3}\label{classVille_a97015113d66d79a1534a3dc0471cf0c3} 
+\mbox{\hyperlink{classSommet}{virtual}} {\bfseries \texorpdfstring{$\sim$}{\string~}\+Ville} ()=\mbox{\hyperlink{classSommet}{default}}
+\begin{DoxyCompactList}\small\item\em Destructeur de \doxylink{classVille}{Ville}. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{classVille_a9ce4bdb981585e7136c841b9e9c9b0e8}{get\+Name}} () \mbox{\hyperlink{classSommet}{const}}
+\begin{DoxyCompactList}\small\item\em Récupère le nom de la ville. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classSommet}{double}} \mbox{\hyperlink{classVille_a349064ea0df29c43d7033eaab8708e84}{get\+Latitude}} () \mbox{\hyperlink{classSommet}{const}}
+\begin{DoxyCompactList}\small\item\em Récupère la latitude de la ville. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classSommet}{double}} \mbox{\hyperlink{classVille_ab777d1e3da57226f6aa47811518df9da}{get\+Longitude}} () \mbox{\hyperlink{classSommet}{const}}
+\begin{DoxyCompactList}\small\item\em Récupère la longitude de la ville. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classSommet}{virtual}} \mbox{\hyperlink{classVille_ab4fe3cdb880709d070f516dab925fb64}{operator string}} () \mbox{\hyperlink{classSommet}{const}}
+\begin{DoxyCompactList}\small\item\em Surcharge de l\textquotesingle{}opérateur de conversion en chaîne de caractères. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classSommet}{bool}} \mbox{\hyperlink{classVille_a87d67d296b8f1b2962c7b5ee0e15dbff}{operator==}} (\mbox{\hyperlink{classSommet}{const}} \mbox{\hyperlink{classVille}{Ville}} \&\mbox{\hyperlink{classSommet}{lhs}}, \mbox{\hyperlink{classSommet}{const}} \mbox{\hyperlink{classVille}{Ville}} \&\mbox{\hyperlink{classSommet}{rhs}})
+\begin{DoxyCompactList}\small\item\em Surcharge de l\textquotesingle{}opérateur d\textquotesingle{}égalité. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classSommet}{bool}} \mbox{\hyperlink{classVille_afda4012bdcb869d1357e8a062a7d9200}{operator!=}} (\mbox{\hyperlink{classSommet}{const}} \mbox{\hyperlink{classVille}{Ville}} \&\mbox{\hyperlink{classSommet}{lhs}}, \mbox{\hyperlink{classSommet}{const}} \mbox{\hyperlink{classVille}{Ville}} \&\mbox{\hyperlink{classSommet}{rhs}})
+\begin{DoxyCompactList}\small\item\em Surcharge de l\textquotesingle{}opérateur de différence. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classSommet}{ostream}} \& \mbox{\hyperlink{classVille_a27b6082d68cab1d39fe0bf8c3d0c2503}{operator$<$$<$}} (\mbox{\hyperlink{classSommet}{ostream}} \&\mbox{\hyperlink{classSommet}{os}}, \mbox{\hyperlink{classSommet}{const}} \mbox{\hyperlink{classVille}{Ville}} \&\mbox{\hyperlink{classSommet}{obj}})
+\begin{DoxyCompactList}\small\item\em Surcharge de l\textquotesingle{}opérateur d\textquotesingle{}affichage. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Représente une ville en fonction de son nom et ses coordonnées géographiques. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classVille_a6fbc4da73442b8f6b4ad9a745cf67ffe}\label{classVille_a6fbc4da73442b8f6b4ad9a745cf67ffe} 
+\index{Ville@{Ville}!Ville@{Ville}}
+\index{Ville@{Ville}!Ville@{Ville}}
+\doxysubsubsection{\texorpdfstring{Ville()}{Ville()}}
+{\footnotesize\ttfamily Ville\+::\+Ville (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classSommet}{const}} string \&}]{name,  }\item[{\mbox{\hyperlink{classSommet}{double}}}]{latitude,  }\item[{\mbox{\hyperlink{classSommet}{double}}}]{longitude }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructeur de \doxylink{classVille}{Ville}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & -\/ Nom de la ville. \\
+\hline
+{\em latitude} & -\/ Latitude géographique. \\
+\hline
+{\em longitude} & -\/ Longitude géographique. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classVille_a349064ea0df29c43d7033eaab8708e84}\label{classVille_a349064ea0df29c43d7033eaab8708e84} 
+\index{Ville@{Ville}!getLatitude@{getLatitude}}
+\index{getLatitude@{getLatitude}!Ville@{Ville}}
+\doxysubsubsection{\texorpdfstring{getLatitude()}{getLatitude()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classSommet}{double}} Ville\+::get\+Latitude (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Récupère la latitude de la ville. 
+
+\begin{DoxyReturn}{Returns}
+double 
+\end{DoxyReturn}
+\Hypertarget{classVille_ab777d1e3da57226f6aa47811518df9da}\label{classVille_ab777d1e3da57226f6aa47811518df9da} 
+\index{Ville@{Ville}!getLongitude@{getLongitude}}
+\index{getLongitude@{getLongitude}!Ville@{Ville}}
+\doxysubsubsection{\texorpdfstring{getLongitude()}{getLongitude()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classSommet}{double}} Ville\+::get\+Longitude (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Récupère la longitude de la ville. 
+
+\begin{DoxyReturn}{Returns}
+double 
+\end{DoxyReturn}
+\Hypertarget{classVille_a9ce4bdb981585e7136c841b9e9c9b0e8}\label{classVille_a9ce4bdb981585e7136c841b9e9c9b0e8} 
+\index{Ville@{Ville}!getName@{getName}}
+\index{getName@{getName}!Ville@{Ville}}
+\doxysubsubsection{\texorpdfstring{getName()}{getName()}}
+{\footnotesize\ttfamily string Ville\+::get\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Récupère le nom de la ville. 
+
+\begin{DoxyReturn}{Returns}
+string 
+\end{DoxyReturn}
+\Hypertarget{classVille_ab4fe3cdb880709d070f516dab925fb64}\label{classVille_ab4fe3cdb880709d070f516dab925fb64} 
+\index{Ville@{Ville}!operator string@{operator string}}
+\index{operator string@{operator string}!Ville@{Ville}}
+\doxysubsubsection{\texorpdfstring{operator string()}{operator string()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classSommet}{virtual}} Ville\+::operator string (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Surcharge de l\textquotesingle{}opérateur de conversion en chaîne de caractères. 
+
+\begin{DoxyReturn}{Returns}
+std\+::string -\/ Représentation textuelle de la ville. 
+\end{DoxyReturn}
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classVille_afda4012bdcb869d1357e8a062a7d9200}\label{classVille_afda4012bdcb869d1357e8a062a7d9200} 
+\index{Ville@{Ville}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!Ville@{Ville}}
+\doxysubsubsection{\texorpdfstring{operator"!=}{operator!=}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classSommet}{bool}} \mbox{\hyperlink{classSommet}{operator!}}= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classSommet}{const}} \mbox{\hyperlink{classVille}{Ville}} \&}]{lhs,  }\item[{\mbox{\hyperlink{classSommet}{const}} \mbox{\hyperlink{classVille}{Ville}} \&}]{rhs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Surcharge de l\textquotesingle{}opérateur de différence. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em lhs} & -\/ Gauche. \\
+\hline
+{\em rhs} & -\/ Droite. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true 
+
+false 
+\end{DoxyReturn}
+\Hypertarget{classVille_a27b6082d68cab1d39fe0bf8c3d0c2503}\label{classVille_a27b6082d68cab1d39fe0bf8c3d0c2503} 
+\index{Ville@{Ville}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!Ville@{Ville}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classSommet}{ostream}} \& \mbox{\hyperlink{classSommet}{operator}}$<$$<$ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classSommet}{ostream}} \&}]{os,  }\item[{\mbox{\hyperlink{classSommet}{const}} \mbox{\hyperlink{classVille}{Ville}} \&}]{obj }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Surcharge de l\textquotesingle{}opérateur d\textquotesingle{}affichage. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em os} & -\/ Flux de sortie. \\
+\hline
+{\em obj} & -\/ Objet \doxylink{classVille}{Ville} à afficher. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+ostream\& -\/ Flux de sortie mis à jour. 
+\end{DoxyReturn}
+\Hypertarget{classVille_a87d67d296b8f1b2962c7b5ee0e15dbff}\label{classVille_a87d67d296b8f1b2962c7b5ee0e15dbff} 
+\index{Ville@{Ville}!operator==@{operator==}}
+\index{operator==@{operator==}!Ville@{Ville}}
+\doxysubsubsection{\texorpdfstring{operator==}{operator==}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classSommet}{bool}} \mbox{\hyperlink{classSommet}{operator}}== (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classSommet}{const}} \mbox{\hyperlink{classVille}{Ville}} \&}]{lhs,  }\item[{\mbox{\hyperlink{classSommet}{const}} \mbox{\hyperlink{classVille}{Ville}} \&}]{rhs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Surcharge de l\textquotesingle{}opérateur d\textquotesingle{}égalité. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em lhs} & -\/ Gauche. \\
+\hline
+{\em rhs} & -\/ Droite. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true 
+
+false 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Partie\+\_\+\+ACL/cpp/\+Modeles/include/Ville.\+h\end{DoxyCompactItemize}

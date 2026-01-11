@@ -1,0 +1,26 @@
+\doxysection{AElement.\+h}
+\hypertarget{AElement_8h_source}{}\label{AElement_8h_source}\index{Partie\_ACL/cpp/Graphes/include/AElement.h@{Partie\_ACL/cpp/Graphes/include/AElement.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ AELEMENT\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ AELEMENT\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ S,\ \textcolor{keyword}{typename}\ T>\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classIVisiteur}{IVisiteur}};}
+\DoxyCodeLine{00011\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classVille}{Ville}};}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classAElement}{AElement}}\ \{}
+\DoxyCodeLine{00017\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{comment}{//\ Attribut\ public\ servant\ de\ clef\ primaire.}}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{int}\ clef;}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00026\ \ \ \ \ \mbox{\hyperlink{classAElement_a9bec192c4a7f3dd54d813a0971fcb183}{AElement}}(\textcolor{keywordtype}{int}\ c\ =\ 0)\ :\ clef(c)\ \{\}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classAElement}{\string~AElement}}()\ \{\};}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{comment}{//DP\ Visitor}}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classAElement_ad9a24e5e58d427c54d24e8e94cb878c5}{accept}}(\mbox{\hyperlink{classIVisiteur}{IVisiteur<double,\ Ville>}}*\ v)\ =\ 0;}
+\DoxyCodeLine{00037\ \};}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

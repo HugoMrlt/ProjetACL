@@ -1,0 +1,89 @@
+\doxysection{Csv\+Outils Class Reference}
+\hypertarget{classCsvOutils}{}\label{classCsvOutils}\index{CsvOutils@{CsvOutils}}
+
+
+Utilitaires pour la manipulation de fichiers CSV.  
+
+
+
+
+{\ttfamily \#include $<$Csv\+Outils.\+h$>$}
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classSommet}{static}} string \mbox{\hyperlink{classCsvOutils_af319fe31246f49d9de3d9799509a5cf6}{trim}} (\mbox{\hyperlink{classSommet}{const}} string \&\mbox{\hyperlink{classSommet}{str}})
+\begin{DoxyCompactList}\small\item\em Supprime les espaces en début et fin de chaîne. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classSommet}{static}} \mbox{\hyperlink{classSommet}{map}}$<$ string, \mbox{\hyperlink{classSommet}{map}}$<$ string, string $>$ $>$ \mbox{\hyperlink{classCsvOutils_a5471c2aa4cb8c69ff46fa091ad0cd930}{charger\+Types\+Route}} (\mbox{\hyperlink{classSommet}{const}} string \&\mbox{\hyperlink{classSommet}{chemin\+Fichier}})
+\begin{DoxyCompactList}\small\item\em Charge les types de route entre villes depuis un fichier CSV. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classSommet}{static}} string \mbox{\hyperlink{classCsvOutils_aee1ab4d16234a6436af642d4dcf69ab6}{get\+Type\+Route}} (\mbox{\hyperlink{classSommet}{const}} \mbox{\hyperlink{classSommet}{map}}$<$ string, \mbox{\hyperlink{classSommet}{map}}$<$ string, string $>$ $>$ \&\mbox{\hyperlink{classSommet}{types}}, \mbox{\hyperlink{classSommet}{const}} string \&\mbox{\hyperlink{classSommet}{villeA}}, \mbox{\hyperlink{classSommet}{const}} string \&\mbox{\hyperlink{classSommet}{villeB}})
+\begin{DoxyCompactList}\small\item\em Récupère le type de route entre deux villes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Utilitaires pour la manipulation de fichiers CSV. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classCsvOutils_a5471c2aa4cb8c69ff46fa091ad0cd930}\label{classCsvOutils_a5471c2aa4cb8c69ff46fa091ad0cd930} 
+\index{CsvOutils@{CsvOutils}!chargerTypesRoute@{chargerTypesRoute}}
+\index{chargerTypesRoute@{chargerTypesRoute}!CsvOutils@{CsvOutils}}
+\doxysubsubsection{\texorpdfstring{chargerTypesRoute()}{chargerTypesRoute()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classSommet}{static}} \mbox{\hyperlink{classSommet}{map}}$<$ string, \mbox{\hyperlink{classSommet}{map}}$<$ string, string $>$ $>$ Csv\+Outils\+::charger\+Types\+Route (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classSommet}{const}} string \&}]{chemin\+Fichier }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Charge les types de route entre villes depuis un fichier CSV. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em chemin\+Fichier} & -\/ Chemin vers le fichier CSV. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+map$<$string, map$<$string, string$>$$>$ -\/ Structure contenant les types de route entre villes. 
+\end{DoxyReturn}
+\Hypertarget{classCsvOutils_aee1ab4d16234a6436af642d4dcf69ab6}\label{classCsvOutils_aee1ab4d16234a6436af642d4dcf69ab6} 
+\index{CsvOutils@{CsvOutils}!getTypeRoute@{getTypeRoute}}
+\index{getTypeRoute@{getTypeRoute}!CsvOutils@{CsvOutils}}
+\doxysubsubsection{\texorpdfstring{getTypeRoute()}{getTypeRoute()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classSommet}{static}} string Csv\+Outils\+::get\+Type\+Route (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classSommet}{const}} \mbox{\hyperlink{classSommet}{map}}$<$ string, \mbox{\hyperlink{classSommet}{map}}$<$ string, string $>$ $>$ \&}]{types,  }\item[{\mbox{\hyperlink{classSommet}{const}} string \&}]{villeA,  }\item[{\mbox{\hyperlink{classSommet}{const}} string \&}]{villeB }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Récupère le type de route entre deux villes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em types} & -\/ Structure contenant les types de route entre villes. \\
+\hline
+{\em villeA} & -\/ Nom de la première ville. \\
+\hline
+{\em villeB} & -\/ Nom de la deuxième ville. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+string -\/ Type de route entre les deux villes. 
+\end{DoxyReturn}
+\Hypertarget{classCsvOutils_af319fe31246f49d9de3d9799509a5cf6}\label{classCsvOutils_af319fe31246f49d9de3d9799509a5cf6} 
+\index{CsvOutils@{CsvOutils}!trim@{trim}}
+\index{trim@{trim}!CsvOutils@{CsvOutils}}
+\doxysubsubsection{\texorpdfstring{trim()}{trim()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classSommet}{static}} string Csv\+Outils\+::trim (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classSommet}{const}} string \&}]{str }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Supprime les espaces en début et fin de chaîne. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em str} & -\/ Chaîne à nettoyer. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+string -\/ Chaîne nettoyée. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Partie\+\_\+\+ACL/cpp/\+Outils/include/Csv\+Outils.\+h\end{DoxyCompactItemize}

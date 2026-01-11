@@ -1,0 +1,51 @@
+\doxysection{Json\+Outils.\+h}
+\hypertarget{JsonOutils_8h_source}{}\label{JsonOutils_8h_source}\index{Partie\_ACL/cpp/Outils/include/JsonOutils.h@{Partie\_ACL/cpp/Outils/include/JsonOutils.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PROJET\_ACL\_JSONOUTILS\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PROJET\_ACL\_JSONOUTILS\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <fstream>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <stdexcept>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}json.hpp"{}}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}Ville.h"{}}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00014\ \textcolor{keyword}{using\ }json\ =\ nlohmann::json;}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00019\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classJsonOutils}{JsonOutils}}\ \{}
+\DoxyCodeLine{00020\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classSommet}{vector<Ville>}}\ \mbox{\hyperlink{classJsonOutils_ab97f883f15914b034174e83d159da734}{chargerDepuisFichier}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ \mbox{\hyperlink{classSommet}{cheminFichier}})\ \{}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSommet}{vector<Ville>}}\ \mbox{\hyperlink{classSommet}{listeVilles}};}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSommet}{ifstream}}\ \mbox{\hyperlink{classSommet}{fichier}}(\mbox{\hyperlink{classSommet}{cheminFichier}});}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classSommet}{fichier}}.is\_open())\ \{}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}Impossible\ d'ouvrir\ le\ fichier\ JSON"{}});}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ json\ \mbox{\hyperlink{classSommet}{donnees}};}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSommet}{fichier}}\ >>\ \mbox{\hyperlink{classSommet}{donnees}};}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ \mbox{\hyperlink{classSommet}{item}}\ :\ \mbox{\hyperlink{classSommet}{donnees}})\ \{}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{classSommet}{nom}}\ =\ \mbox{\hyperlink{classSommet}{item}}.value(\textcolor{stringliteral}{"{}ville"{}},\ \textcolor{stringliteral}{"{}Inconnu"{}});}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classSommet}{lat}}\ =\ \mbox{\hyperlink{classSommet}{item}}.value(\textcolor{stringliteral}{"{}latitude"{}},\ 0.0);}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classSommet}{lon}}\ =\ \mbox{\hyperlink{classSommet}{item}}.value(\textcolor{stringliteral}{"{}longitude"{}},\ 0.0);}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSommet}{listeVilles}}.emplace\_back(\mbox{\hyperlink{classSommet}{nom}},\ \mbox{\hyperlink{classSommet}{lat}},\ \mbox{\hyperlink{classSommet}{lon}});}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classSommet}{listeVilles}};}
+\DoxyCodeLine{00050\ \ \ \ \ \}}
+\DoxyCodeLine{00051\ \};}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//PROJET\_ACL\_JSONOUTILS\_H}}
+
+\end{DoxyCode}

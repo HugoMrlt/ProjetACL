@@ -1,0 +1,116 @@
+\doxysection{Visiteur\+Statistiques Class Reference}
+\hypertarget{classVisiteurStatistiques}{}\label{classVisiteurStatistiques}\index{VisiteurStatistiques@{VisiteurStatistiques}}
+
+
+Visiteur pour calculer des statistiques sur un graphe.  
+
+
+
+
+{\ttfamily \#include $<$Visiteur\+Statistiques.\+h$>$}
+
+
+
+Inheritance diagram for Visiteur\+Statistiques\+:
+% FIG 0
+
+
+Collaboration diagram for Visiteur\+Statistiques\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classVisiteurStatistiques_ab4c230a1c8c934da9adf9b88d040ab8b}\label{classVisiteurStatistiques_ab4c230a1c8c934da9adf9b88d040ab8b} 
+{\bfseries Visiteur\+Statistiques} ()
+\begin{DoxyCompactList}\small\item\em Constructeur par défaut. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classSommet}{void}} \mbox{\hyperlink{classVisiteurStatistiques_a4769117c31653515c19b310ad7e7dfce}{visiter\+Sommet}} (\mbox{\hyperlink{classSommet}{Sommet}}$<$ \mbox{\hyperlink{classVille}{Ville}} $>$ \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classSommet}{s}}) \mbox{\hyperlink{classSommet}{override}}
+\begin{DoxyCompactList}\small\item\em Visite un sommet et incrémente le compteur d\textquotesingle{}étapes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classSommet}{void}} \mbox{\hyperlink{classVisiteurStatistiques_aebeddf76ac092297e4989cf041f897f6}{visiter\+Arete}} (\mbox{\hyperlink{classArete}{Arete}}$<$ \mbox{\hyperlink{classSommet}{double}}, \mbox{\hyperlink{classVille}{Ville}} $>$ \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classSommet}{a}}) \mbox{\hyperlink{classSommet}{override}}
+\begin{DoxyCompactList}\small\item\em Visite une arête et ajoute son poids à la distance cumulée. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classSommet}{double}} \mbox{\hyperlink{classVisiteurStatistiques_a8a3aba102cafdbbbc0fdd6eeef91f558}{get\+Distance}} () \mbox{\hyperlink{classSommet}{const}}
+\begin{DoxyCompactList}\small\item\em Récupère la distance cumulée. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classSommet}{int}} \mbox{\hyperlink{classVisiteurStatistiques_a13585e513c39c1b1108c7c42fa55fc20}{get\+Etapes}} () \mbox{\hyperlink{classSommet}{const}}
+\begin{DoxyCompactList}\small\item\em Récupère le nombre d\textquotesingle{}étapes (sommets visités). \end{DoxyCompactList}\item 
+\Hypertarget{classVisiteurStatistiques_a368cc2c5adb15b36f7673f9901fdb93b}\label{classVisiteurStatistiques_a368cc2c5adb15b36f7673f9901fdb93b} 
+\mbox{\hyperlink{classSommet}{void}} {\bfseries reset} ()
+\begin{DoxyCompactList}\small\item\em Réinitialise les statistiques. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classIVisiteur}{IVisiteur$<$ double, Ville $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classSommet}{virtual}} {\bfseries \texorpdfstring{$\sim$}{\string~}\+IVisiteur} ()
+\begin{DoxyCompactList}\small\item\em Destructeur virtuel. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Visiteur pour calculer des statistiques sur un graphe. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classVisiteurStatistiques_a8a3aba102cafdbbbc0fdd6eeef91f558}\label{classVisiteurStatistiques_a8a3aba102cafdbbbc0fdd6eeef91f558} 
+\index{VisiteurStatistiques@{VisiteurStatistiques}!getDistance@{getDistance}}
+\index{getDistance@{getDistance}!VisiteurStatistiques@{VisiteurStatistiques}}
+\doxysubsubsection{\texorpdfstring{getDistance()}{getDistance()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classSommet}{double}} Visiteur\+Statistiques\+::get\+Distance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Récupère la distance cumulée. 
+
+\begin{DoxyReturn}{Returns}
+double -\/ Distance totale parcourue. 
+\end{DoxyReturn}
+\Hypertarget{classVisiteurStatistiques_a13585e513c39c1b1108c7c42fa55fc20}\label{classVisiteurStatistiques_a13585e513c39c1b1108c7c42fa55fc20} 
+\index{VisiteurStatistiques@{VisiteurStatistiques}!getEtapes@{getEtapes}}
+\index{getEtapes@{getEtapes}!VisiteurStatistiques@{VisiteurStatistiques}}
+\doxysubsubsection{\texorpdfstring{getEtapes()}{getEtapes()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classSommet}{int}} Visiteur\+Statistiques\+::get\+Etapes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Récupère le nombre d\textquotesingle{}étapes (sommets visités). 
+
+\begin{DoxyReturn}{Returns}
+int -\/ Nombre d\textquotesingle{}étapes. 
+\end{DoxyReturn}
+\Hypertarget{classVisiteurStatistiques_aebeddf76ac092297e4989cf041f897f6}\label{classVisiteurStatistiques_aebeddf76ac092297e4989cf041f897f6} 
+\index{VisiteurStatistiques@{VisiteurStatistiques}!visiterArete@{visiterArete}}
+\index{visiterArete@{visiterArete}!VisiteurStatistiques@{VisiteurStatistiques}}
+\doxysubsubsection{\texorpdfstring{visiterArete()}{visiterArete()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classSommet}{void}} Visiteur\+Statistiques\+::visiter\+Arete (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classArete}{Arete}}$<$ \mbox{\hyperlink{classSommet}{double}}, \mbox{\hyperlink{classVille}{Ville}} $>$ \texorpdfstring{$\ast$}{*}}]{a }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Visite une arête et ajoute son poids à la distance cumulée. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & -\/ L\textquotesingle{}arête à visiter. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classIVisiteur_a91676ca7854371eeba508971db14a0d3}{IVisiteur$<$ double, Ville $>$}}.
+
+\Hypertarget{classVisiteurStatistiques_a4769117c31653515c19b310ad7e7dfce}\label{classVisiteurStatistiques_a4769117c31653515c19b310ad7e7dfce} 
+\index{VisiteurStatistiques@{VisiteurStatistiques}!visiterSommet@{visiterSommet}}
+\index{visiterSommet@{visiterSommet}!VisiteurStatistiques@{VisiteurStatistiques}}
+\doxysubsubsection{\texorpdfstring{visiterSommet()}{visiterSommet()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classSommet}{void}} Visiteur\+Statistiques\+::visiter\+Sommet (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classSommet}{Sommet}}$<$ \mbox{\hyperlink{classVille}{Ville}} $>$ \texorpdfstring{$\ast$}{*}}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Visite un sommet et incrémente le compteur d\textquotesingle{}étapes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & -\/ Le sommet à visiter. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classIVisiteur_ae3543c5472b747c3ec0103bd5dfbb02a}{IVisiteur$<$ double, Ville $>$}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Partie\+\_\+\+ACL/cpp/\+Graphes/include/Visiteur\+Statistiques.\+h\end{DoxyCompactItemize}

@@ -1,0 +1,67 @@
+\doxysection{TSPTemps Class Reference}
+\hypertarget{classTSPTemps}{}\label{classTSPTemps}\index{TSPTemps@{TSPTemps}}
+
+
+Stratégie \doxylink{classTSP}{TSP} basée sur le temps de trajet.  
+
+
+
+
+{\ttfamily \#include $<$TSPTemps.\+h$>$}
+
+
+
+Inheritance diagram for TSPTemps\+:
+% FIG 0
+
+
+Collaboration diagram for TSPTemps\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classTSPTemps_a0c633cff0e056f612a622af9f290d438}\label{classTSPTemps_a0c633cff0e056f612a622af9f290d438} 
+{\bfseries TSPTemps} ()
+\begin{DoxyCompactList}\small\item\em Constructeur \+: initialise les vitesses moyennes par type de route. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classSommet}{double}} \mbox{\hyperlink{classTSPTemps_a17708ad8c7c94e43127aa34e4eda1f14}{calculer\+Poids}} (\mbox{\hyperlink{classSommet}{double}} \mbox{\hyperlink{classSommet}{distance\+Km}}, \mbox{\hyperlink{classSommet}{const}} std\+::string \&\mbox{\hyperlink{classSommet}{type\+Route}}) \mbox{\hyperlink{classSommet}{override}}
+\begin{DoxyCompactList}\small\item\em Calcule le poids d\textquotesingle{}une arête en fonction du temps de trajet. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classIStrategieTSP}{IStrategie\+TSP}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classSommet}{virtual}} {\bfseries \texorpdfstring{$\sim$}{\string~}\+IStrategie\+TSP} ()=\mbox{\hyperlink{classSommet}{default}}
+\begin{DoxyCompactList}\small\item\em Destructeur virtuel. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Stratégie \doxylink{classTSP}{TSP} basée sur le temps de trajet. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classTSPTemps_a17708ad8c7c94e43127aa34e4eda1f14}\label{classTSPTemps_a17708ad8c7c94e43127aa34e4eda1f14} 
+\index{TSPTemps@{TSPTemps}!calculerPoids@{calculerPoids}}
+\index{calculerPoids@{calculerPoids}!TSPTemps@{TSPTemps}}
+\doxysubsubsection{\texorpdfstring{calculerPoids()}{calculerPoids()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classSommet}{double}} TSPTemps\+::calculer\+Poids (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classSommet}{double}}}]{distance\+Km,  }\item[{\mbox{\hyperlink{classSommet}{const}} std\+::string \&}]{type\+Route }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Calcule le poids d\textquotesingle{}une arête en fonction du temps de trajet. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em distance\+Km} & -\/ Distance en kilomètres entre deux villes. \\
+\hline
+{\em type\+Route} & -\/ Type de route (utilisé pour déterminer la vitesse moyenne). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+double -\/ Poids calculé pour l\textquotesingle{}arête (temps de trajet). 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classIStrategieTSP_a840a90a82b92beffbe9ec5e07b3e220b}{IStrategie\+TSP}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Partie\+\_\+\+ACL/cpp/\+Graphes/include/TSPTemps.\+h\end{DoxyCompactItemize}

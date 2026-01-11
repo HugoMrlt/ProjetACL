@@ -1,0 +1,76 @@
+\doxysection{AElement Class Reference}
+\hypertarget{classAElement}{}\label{classAElement}\index{AElement@{AElement}}
+
+
+Classe abstraite représentant un élément du graphe.  
+
+
+
+
+{\ttfamily \#include $<$AElement.\+h$>$}
+
+
+
+Inheritance diagram for AElement\+:
+% FIG 0
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classAElement_a9bec192c4a7f3dd54d813a0971fcb183}{AElement}} (\mbox{\hyperlink{classSommet}{int}} \mbox{\hyperlink{classSommet}{c}}=0)
+\begin{DoxyCompactList}\small\item\em Constructeur de \doxylink{classAElement}{AElement}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classSommet}{virtual}} \mbox{\hyperlink{classSommet}{void}} \mbox{\hyperlink{classAElement_ad9a24e5e58d427c54d24e8e94cb878c5}{accept}} (\mbox{\hyperlink{classIVisiteur}{IVisiteur}}$<$ \mbox{\hyperlink{classSommet}{double}}, \mbox{\hyperlink{classVille}{Ville}} $>$ \texorpdfstring{$\ast$}{*}v)=0
+\begin{DoxyCompactList}\small\item\em Accepte un visiteur. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classAElement_a4f8289e370e3b8e17836eecdfbfe412e}\label{classAElement_a4f8289e370e3b8e17836eecdfbfe412e} 
+\mbox{\hyperlink{classSommet}{int}} {\bfseries clef}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Classe abstraite représentant un élément du graphe. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classAElement_a9bec192c4a7f3dd54d813a0971fcb183}\label{classAElement_a9bec192c4a7f3dd54d813a0971fcb183} 
+\index{AElement@{AElement}!AElement@{AElement}}
+\index{AElement@{AElement}!AElement@{AElement}}
+\doxysubsubsection{\texorpdfstring{AElement()}{AElement()}}
+{\footnotesize\ttfamily AElement\+::\+AElement (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classSommet}{int}}}]{c = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructeur de \doxylink{classAElement}{AElement}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em c} & -\/ Valeur de la clef primaire. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classAElement_ad9a24e5e58d427c54d24e8e94cb878c5}\label{classAElement_ad9a24e5e58d427c54d24e8e94cb878c5} 
+\index{AElement@{AElement}!accept@{accept}}
+\index{accept@{accept}!AElement@{AElement}}
+\doxysubsubsection{\texorpdfstring{accept()}{accept()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classSommet}{virtual}} \mbox{\hyperlink{classSommet}{void}} AElement\+::accept (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classIVisiteur}{IVisiteur}}$<$ \mbox{\hyperlink{classSommet}{double}}, \mbox{\hyperlink{classVille}{Ville}} $>$ \texorpdfstring{$\ast$}{*}}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Accepte un visiteur. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em v} & -\/ Visiteur à accepter. \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{classArete_a7ad0e689c75b8f3dc21c5b68b7f72a9a}{Arete$<$ S, T $>$}}, and \mbox{\hyperlink{classSommet_af82a3edc158a0744c3f52540281b12ac}{Sommet$<$ T $>$}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Partie\+\_\+\+ACL/cpp/\+Graphes/include/AElement.\+h\end{DoxyCompactItemize}

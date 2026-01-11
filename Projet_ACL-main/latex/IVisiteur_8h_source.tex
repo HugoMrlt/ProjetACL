@@ -1,0 +1,23 @@
+\doxysection{IVisiteur.\+h}
+\hypertarget{IVisiteur_8h_source}{}\label{IVisiteur_8h_source}\index{Partie\_ACL/cpp/Graphes/include/IVisiteur.h@{Partie\_ACL/cpp/Graphes/include/IVisiteur.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ IVISITEUR\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ IVISITEUR\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ Pré-\/déclarations.}}
+\DoxyCodeLine{00005\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classSommet}{Sommet}};}
+\DoxyCodeLine{00006\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ S,\ \textcolor{keyword}{typename}\ T>\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classArete}{Arete}};}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ S,\ \textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classIVisiteur}{IVisiteur}}\ \{}
+\DoxyCodeLine{00016\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classIVisiteur_ad7afc72c54e1551b4aa0736cb2aa930d}{\string~IVisiteur}}()\ \{\}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classIVisiteur_ae3543c5472b747c3ec0103bd5dfbb02a}{visiterSommet}}(\mbox{\hyperlink{classSommet}{Sommet<T>}}*\ \mbox{\hyperlink{classSommet}{s}})\ =\ 0;}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classIVisiteur_a91676ca7854371eeba508971db14a0d3}{visiterArete}}(\mbox{\hyperlink{classSommet}{Arete<S,\ T>}}*\ \mbox{\hyperlink{classSommet}{a}})\ =\ 0;}
+\DoxyCodeLine{00035\ \};}
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

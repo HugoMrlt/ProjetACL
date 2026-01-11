@@ -1,0 +1,53 @@
+\doxysection{Ville.\+h}
+\hypertarget{Ville_8h_source}{}\label{Ville_8h_source}\index{Partie\_ACL/cpp/Modeles/include/Ville.h@{Partie\_ACL/cpp/Modeles/include/Ville.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PROJET\_ACL\_VILLE\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PROJET\_ACL\_VILLE\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classVille}{Ville}}\ \{}
+\DoxyCodeLine{00013\ \ \ \ \ std::string\ name;}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordtype}{double}\ latitude;}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordtype}{double}\ longitude;}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00025\ \ \ \ \ \mbox{\hyperlink{classVille_a6fbc4da73442b8f6b4ad9a745cf67ffe}{Ville}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\ \&name,\ \textcolor{keywordtype}{double}\ latitude,\ \textcolor{keywordtype}{double}\ longitude)}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ :\ name(name),}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ latitude(latitude),}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ longitude(longitude)\ \{}
+\DoxyCodeLine{00029\ \ \ \ \ \}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classVille_a97015113d66d79a1534a3dc0471cf0c3}{\string~Ville}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00041\ \ \ \ \ [[\mbox{\hyperlink{classSommet}{nodiscard}}]]\ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{classVille_a9ce4bdb981585e7136c841b9e9c9b0e8}{getName}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ name;\ \}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00048\ \ \ \ \ [[\mbox{\hyperlink{classSommet}{nodiscard}}]]\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classVille_a349064ea0df29c43d7033eaab8708e84}{getLatitude}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ latitude;\ \}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00055\ \ \ \ \ [[\mbox{\hyperlink{classSommet}{nodiscard}}]]\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classVille_ab777d1e3da57226f6aa47811518df9da}{getLongitude}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ longitude;\ \}}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keyword}{operator}\ string()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ name;}
+\DoxyCodeLine{00064\ \ \ \ \ \}}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classVille_a87d67d296b8f1b2962c7b5ee0e15dbff}{operator==}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classVille}{Ville}}\ \&\mbox{\hyperlink{classSommet}{lhs}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classVille}{Ville}}\ \&\mbox{\hyperlink{classSommet}{rhs}})\ \{}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classSommet}{lhs}}.name\ ==\ \mbox{\hyperlink{classSommet}{rhs}}.name;}
+\DoxyCodeLine{00076\ \ \ \ \ \}}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classVille_afda4012bdcb869d1357e8a062a7d9200}{operator!=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classVille}{Ville}}\ \&\mbox{\hyperlink{classSommet}{lhs}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classVille}{Ville}}\ \&\mbox{\hyperlink{classSommet}{rhs}})\ \{}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ !(\mbox{\hyperlink{classSommet}{lhs}}\ ==\ \mbox{\hyperlink{classSommet}{rhs}});}
+\DoxyCodeLine{00088\ \ \ \ \ \}}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keyword}{friend}\ \mbox{\hyperlink{classSommet}{ostream}}\ \&\mbox{\hyperlink{classVille_a27b6082d68cab1d39fe0bf8c3d0c2503}{operator<<}}(\mbox{\hyperlink{classSommet}{ostream}}\ \&\mbox{\hyperlink{classSommet}{os}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classVille}{Ville}}\ \&\mbox{\hyperlink{classSommet}{obj}})\ \{}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSommet}{os\ <<\ static\_cast<string>}}(\mbox{\hyperlink{classSommet}{obj}});}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classSommet}{os}};}
+\DoxyCodeLine{00100\ \ \ \ \ \}}
+\DoxyCodeLine{00101\ \};}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00103\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//PROJET\_ACL\_VILLE\_H}}
+
+\end{DoxyCode}

@@ -1,0 +1,58 @@
+\doxysection{IStrategie\+TSP Class Reference}
+\hypertarget{classIStrategieTSP}{}\label{classIStrategieTSP}\index{IStrategieTSP@{IStrategieTSP}}
+
+
+Interface pour les stratégies de calcul du poids dans le \doxylink{classTSP}{TSP}.  
+
+
+
+
+{\ttfamily \#include $<$IStrategie\+TSP.\+h$>$}
+
+
+
+Inheritance diagram for IStrategie\+TSP\+:
+% FIG 0
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classIStrategieTSP_aecc697b8bb655c73adf1df832c832312}\label{classIStrategieTSP_aecc697b8bb655c73adf1df832c832312} 
+\mbox{\hyperlink{classSommet}{virtual}} {\bfseries \texorpdfstring{$\sim$}{\string~}\+IStrategie\+TSP} ()=\mbox{\hyperlink{classSommet}{default}}
+\begin{DoxyCompactList}\small\item\em Destructeur virtuel. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classSommet}{virtual}} \mbox{\hyperlink{classSommet}{double}} \mbox{\hyperlink{classIStrategieTSP_a840a90a82b92beffbe9ec5e07b3e220b}{calculer\+Poids}} (\mbox{\hyperlink{classSommet}{double}} \mbox{\hyperlink{classSommet}{distance\+Km}}, \mbox{\hyperlink{classSommet}{const}} std\+::string \&\mbox{\hyperlink{classSommet}{type\+Route}})=0
+\begin{DoxyCompactList}\small\item\em Calcule le poids d\textquotesingle{}une arête en fonction de la distance et du type de route. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Interface pour les stratégies de calcul du poids dans le \doxylink{classTSP}{TSP}. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classIStrategieTSP_a840a90a82b92beffbe9ec5e07b3e220b}\label{classIStrategieTSP_a840a90a82b92beffbe9ec5e07b3e220b} 
+\index{IStrategieTSP@{IStrategieTSP}!calculerPoids@{calculerPoids}}
+\index{calculerPoids@{calculerPoids}!IStrategieTSP@{IStrategieTSP}}
+\doxysubsubsection{\texorpdfstring{calculerPoids()}{calculerPoids()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classSommet}{virtual}} \mbox{\hyperlink{classSommet}{double}} IStrategie\+TSP\+::calculer\+Poids (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classSommet}{double}}}]{distance\+Km,  }\item[{\mbox{\hyperlink{classSommet}{const}} std\+::string \&}]{type\+Route }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Calcule le poids d\textquotesingle{}une arête en fonction de la distance et du type de route. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em distance\+Km} & -\/ Distance en kilomètres entre deux villes. \\
+\hline
+{\em type\+Route} & -\/ Type de route (ex\+: "{}autoroute"{}, "{}route nationale"{}, "{}route départementale"{}). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+double -\/ Poids calculé pour l\textquotesingle{}arête. 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classTSPDistance_a1be938c3f8f2810739028e06b01d0b60}{TSPDistance}}, and \mbox{\hyperlink{classTSPTemps_a17708ad8c7c94e43127aa34e4eda1f14}{TSPTemps}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Partie\+\_\+\+ACL/cpp/\+Graphes/include/IStrategie\+TSP.\+h\end{DoxyCompactItemize}

@@ -1,0 +1,33 @@
+\doxysection{Sommet.\+h}
+\hypertarget{Sommet_8h_source}{}\label{Sommet_8h_source}\index{Partie\_ACL/cpp/Graphes/include/Sommet.h@{Partie\_ACL/cpp/Graphes/include/Sommet.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ SOMMET\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ SOMMET\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}GElement.h"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}IVisiteur.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <sstream>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classSommet}{Sommet}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classGElement}{GElement}}<T>\ \{}
+\DoxyCodeLine{00016\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{comment}{//\ Attribut\ public\ représentant\ le\ degré\ du\ sommet.}}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordtype}{int}\ degre;}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00028\ \ \ \ \ \mbox{\hyperlink{classSommet_a85271503cfa399bd34d8020eac1c52be}{Sommet}}(\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classSommet}{c}}\ =\ 0,\ \mbox{\hyperlink{classSommet}{T}}\ \mbox{\hyperlink{classSommet}{val}}\ =\ \mbox{\hyperlink{classSommet}{T}}(),\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classSommet}{d}}\ =\ 0)\ }
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classGElement}{GElement}}<\mbox{\hyperlink{classSommet}{T}}>(\mbox{\hyperlink{classSommet}{c}},\ \mbox{\hyperlink{classSommet}{val}}),\ degre(\mbox{\hyperlink{classSommet}{d}})\ \{\}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{comment}{//DP\ Visitor}}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classSommet_af82a3edc158a0744c3f52540281b12ac}{accept}}(\mbox{\hyperlink{classSommet}{IVisiteur<double,\ Ville>}}*\ v)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_same\_v<T,\ Ville>)\ \{}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ v-\/>visiterSommet((\mbox{\hyperlink{classSommet}{Sommet<Ville>}}*)\textcolor{keyword}{this});}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00042\ \ \ \ \ \}}
+\DoxyCodeLine{00043\ \};}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

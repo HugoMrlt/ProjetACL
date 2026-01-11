@@ -1,0 +1,64 @@
+\doxysection{TSP.\+h}
+\hypertarget{TSP_8h_source}{}\label{TSP_8h_source}\index{Partie\_ACL/cpp/Graphes/include/TSP.h@{Partie\_ACL/cpp/Graphes/include/TSP.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ TSP\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ TSP\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}Graphe.h"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <limits>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ S,\ \textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classTSP}{TSP}}\ \{}
+\DoxyCodeLine{00016\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ SelecteurVoisin>}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<Sommet<T>*>\ \mbox{\hyperlink{classTSP_afb57eac0610d3ae68b1f95b4ae618d9c}{plusProcheVoisin}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classSommet}{Graphe<S,\ T>}}\&\ \mbox{\hyperlink{classSommet}{graphe}},\ \mbox{\hyperlink{classSommet}{Sommet<T>}}*\ \mbox{\hyperlink{classSommet}{depart}},\mbox{\hyperlink{classSommet}{SelecteurVoisin}}\ \mbox{\hyperlink{classSommet}{choisir}})\ \{}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ std::vector<Sommet<T>*>\ \mbox{\hyperlink{classSommet}{parcours}};}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classSommet}{depart}}\ ||\ \mbox{\hyperlink{classSommet}{graphe}}.lSommets\ ==\ \textcolor{keyword}{nullptr})\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classSommet}{parcours}};}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 1.\ On\ récupère\ tous\ les\ sommets\ à\ visiter}}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ std::vector<Sommet<T>*>\ \mbox{\hyperlink{classSommet}{aVisiter}};}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSommet}{PElement<Sommet<T>}}*>*\ \mbox{\hyperlink{classSommet}{curr}}\ =\ \mbox{\hyperlink{classSommet}{graphe}}.lSommets;}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (\mbox{\hyperlink{classSommet}{curr}}\ !=\ \textcolor{keyword}{nullptr})\ \{}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classSommet}{curr}}-\/>v\ !=\ \mbox{\hyperlink{classSommet}{depart}})\ \{}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSommet}{aVisiter}}.push\_back(\mbox{\hyperlink{classSommet}{curr}}-\/>v);}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSommet}{curr}}\ =\ \mbox{\hyperlink{classSommet}{curr}}-\/>suivant;}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 2.\ Initialisation\ du\ parcours}}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSommet}{Sommet<T>}}*\ \mbox{\hyperlink{classSommet}{courant}}\ =\ \mbox{\hyperlink{classSommet}{depart}};}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSommet}{parcours}}.push\_back(\mbox{\hyperlink{classSommet}{courant}});}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 3.\ Boucle\ gloutonne}}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (!\mbox{\hyperlink{classSommet}{aVisiter}}.empty())\ \{}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//double\ minDist\ =\ std::numeric\_limits<double>::max();}}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classSommet}{indexMeilleurVoisin}}\ =\ -\/1;}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSommet}{indexMeilleurVoisin}}\ =\ \mbox{\hyperlink{classSommet}{choisir}}(\mbox{\hyperlink{classSommet}{courant}},\ \mbox{\hyperlink{classSommet}{aVisiter}},\ \mbox{\hyperlink{classSommet}{graphe}});}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classSommet}{indexMeilleurVoisin}}\ ==\ -\/1)\ \{}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 4.\ Déplacement\ vers\ le\ meilleur\ voisin}}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSommet}{Sommet<T>}}*\ \mbox{\hyperlink{classSommet}{prochain}}\ =\ \mbox{\hyperlink{classSommet}{aVisiter}}[\mbox{\hyperlink{classSommet}{indexMeilleurVoisin}}];}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSommet}{parcours}}.push\_back(\mbox{\hyperlink{classSommet}{prochain}});}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSommet}{courant}}\ =\ \mbox{\hyperlink{classSommet}{prochain}};}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 5.\ On\ retire\ le\ voisin\ visité\ de\ la\ liste}}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSommet}{aVisiter}}[\mbox{\hyperlink{classSommet}{indexMeilleurVoisin}}]\ =\ \mbox{\hyperlink{classSommet}{aVisiter}}.back();}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSommet}{aVisiter}}.pop\_back();}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 6.\ Retour\ au\ départ\ pour\ fermer\ la\ boucle}}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSommet}{parcours}}.push\_back(\mbox{\hyperlink{classSommet}{depart}});}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classSommet}{parcours}};}
+\DoxyCodeLine{00084\ \ \ \ \ \}}
+\DoxyCodeLine{00085\ \};}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ TSP\_H}}
+
+\end{DoxyCode}

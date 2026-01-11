@@ -19,3 +19,6 @@ Implémentation d'un graphe générique en C++ comme décrit dans le PDF.
 | `make clean`                  | Nettoie les binaires.         | `make clean`                          |
 
 Lancer les tests un par un pour valider chaque classe, puis le global.
+
+# Partie java
+Si exécutée avec le script, changer le chemin en `REGION_DIR = "Partie_ACL/Assets/Region/"` dans `RegionUtils`.

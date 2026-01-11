@@ -1,0 +1,76 @@
+\doxysection{PElement\texorpdfstring{$<$}{<} T \texorpdfstring{$\ast$}{*} \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classPElement_3_01T_01_5_01_4}{}\label{classPElement_3_01T_01_5_01_4}\index{PElement$<$ T \texorpdfstring{$\ast$}{*} $>$@{PElement$<$ T \texorpdfstring{$\ast$}{*} $>$}}
+
+
+Spécialisation de \doxylink{classPElement}{PElement} pour les pointeurs.  
+
+
+
+
+{\ttfamily \#include $<$PElement.\+h$>$}
+
+
+
+Collaboration diagram for PElement\texorpdfstring{$<$}{<} T \texorpdfstring{$\ast$}{*} \texorpdfstring{$>$}{>}\+:
+% FIG 0
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classPElement_3_01T_01_5_01_4_a1dd032c4c0beb6de0f3f4a6702ac38c6}{PElement}} (\mbox{\hyperlink{classSommet}{T}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classSommet}{const}} \&\mbox{\hyperlink{classSommet}{valeur}}, \mbox{\hyperlink{classPElement}{PElement}}$<$ \mbox{\hyperlink{classSommet}{T}} \texorpdfstring{$\ast$}{*} $>$ \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classSommet}{next}}=\mbox{\hyperlink{classSommet}{nullptr}})
+\begin{DoxyCompactList}\small\item\em Constructeur \+: permet d\textquotesingle{}insérer facilement en tête de liste. \end{DoxyCompactList}\item 
+\Hypertarget{classPElement_3_01T_01_5_01_4_ab257b15fd557b4570bb275c5108f74c2}\label{classPElement_3_01T_01_5_01_4_ab257b15fd557b4570bb275c5108f74c2} 
+{\bfseries \texorpdfstring{$\sim$}{\string~}\+PElement} ()
+\begin{DoxyCompactList}\small\item\em Destructeur \+: libère récursivement toute la liste. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classPElement_3_01T_01_5_01_4_a4595f1e73becf155fe3eb2678b3fa9c4}\label{classPElement_3_01T_01_5_01_4_a4595f1e73becf155fe3eb2678b3fa9c4} 
+\mbox{\hyperlink{classSommet}{T}} \texorpdfstring{$\ast$}{*} {\bfseries v}
+\item 
+\Hypertarget{classPElement_3_01T_01_5_01_4_a2ef49cbbb66b6a1390b0c806a796ecc4}\label{classPElement_3_01T_01_5_01_4_a2ef49cbbb66b6a1390b0c806a796ecc4} 
+\mbox{\hyperlink{classPElement}{PElement}}$<$ \mbox{\hyperlink{classSommet}{T}} \texorpdfstring{$\ast$}{*} $>$ \texorpdfstring{$\ast$}{*} {\bfseries suivant}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classPElement_3_01T_01_5_01_4_a5201533fabb0a39fbc719908396580b8}\label{classPElement_3_01T_01_5_01_4_a5201533fabb0a39fbc719908396580b8} 
+std\+::ostream \& {\bfseries operator$<$$<$} (std\+::ostream \&\mbox{\hyperlink{classSommet}{os}}, \mbox{\hyperlink{classSommet}{const}} \mbox{\hyperlink{classPElement}{PElement}}$<$ \mbox{\hyperlink{classSommet}{T}} \texorpdfstring{$\ast$}{*} $>$ \&\mbox{\hyperlink{classSommet}{liste}})
+\begin{DoxyCompactList}\small\item\em Surcharge de l\textquotesingle{}opérateur \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} pour afficher une liste complète de pointeurs. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classSommet}{typename}} \mbox{\hyperlink{classSommet}{T}}$>$\newline
+class PElement$<$ T \texorpdfstring{$\ast$}{*} $>$}
+Spécialisation de \doxylink{classPElement}{PElement} pour les pointeurs. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & -\/ Type des données pointées. \\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classPElement_3_01T_01_5_01_4_a1dd032c4c0beb6de0f3f4a6702ac38c6}\label{classPElement_3_01T_01_5_01_4_a1dd032c4c0beb6de0f3f4a6702ac38c6} 
+\index{PElement$<$ T \texorpdfstring{$\ast$}{*} $>$@{PElement$<$ T \texorpdfstring{$\ast$}{*} $>$}!PElement@{PElement}}
+\index{PElement@{PElement}!PElement$<$ T \texorpdfstring{$\ast$}{*} $>$@{PElement$<$ T \texorpdfstring{$\ast$}{*} $>$}}
+\doxysubsubsection{\texorpdfstring{PElement()}{PElement()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classSommet}{typename}} \mbox{\hyperlink{classSommet}{T}} $>$ \\
+\mbox{\hyperlink{classPElement}{PElement}}$<$ \mbox{\hyperlink{classSommet}{T}} \texorpdfstring{$\ast$}{*} $>$\mbox{\hyperlink{classPElement}{\+::\+PElement}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classSommet}{T}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classSommet}{const}} \&}]{valeur,  }\item[{\mbox{\hyperlink{classPElement}{PElement}}$<$ \mbox{\hyperlink{classSommet}{T}} \texorpdfstring{$\ast$}{*} $>$ \texorpdfstring{$\ast$}{*}}]{next = {\ttfamily \mbox{\hyperlink{classSommet}{nullptr}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructeur \+: permet d\textquotesingle{}insérer facilement en tête de liste. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em valeur} & -\/ Pointeur à stocker dans l\textquotesingle{}élément. \\
+\hline
+{\em next} & -\/ Pointeur vers l\textquotesingle{}élément suivant (par défaut nullptr). \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Partie\+\_\+\+ACL/cpp/\+Graphes/include/PElement.\+h\end{DoxyCompactItemize}

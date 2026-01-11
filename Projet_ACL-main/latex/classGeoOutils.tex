@@ -1,0 +1,52 @@
+\doxysection{Geo\+Outils Class Reference}
+\hypertarget{classGeoOutils}{}\label{classGeoOutils}\index{GeoOutils@{GeoOutils}}
+
+
+Classe utilitaire pour les calculs géographiques. En ACL, on utilise souvent des méthodes statiques pour les "{}boîtes à outils"{}.  
+
+
+
+
+{\ttfamily \#include $<$Geo\+Outils.\+h$>$}
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classSommet}{static}} \mbox{\hyperlink{classSommet}{double}} \mbox{\hyperlink{classGeoOutils_a888a44deabf46c8600d24a9a13d54442}{calculer\+Distance}} (\mbox{\hyperlink{classSommet}{const}} \mbox{\hyperlink{classVille}{Ville}} \&\mbox{\hyperlink{classSommet}{v1}}, \mbox{\hyperlink{classSommet}{const}} \mbox{\hyperlink{classVille}{Ville}} \&\mbox{\hyperlink{classSommet}{v2}})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classGeoOutils_aed41d6b9a9d4cc4ab5f9bd8cd943204a}\label{classGeoOutils_aed41d6b9a9d4cc4ab5f9bd8cd943204a} 
+\mbox{\hyperlink{classSommet}{static}} \mbox{\hyperlink{classSommet}{constexpr}} \mbox{\hyperlink{classSommet}{double}} {\bfseries RAYON\+\_\+\+TERRE} = 6371.\+0
+\item 
+\Hypertarget{classGeoOutils_a61722dcd65447c8aa6ec7332f45eb4be}\label{classGeoOutils_a61722dcd65447c8aa6ec7332f45eb4be} 
+\mbox{\hyperlink{classSommet}{static}} \mbox{\hyperlink{classSommet}{constexpr}} \mbox{\hyperlink{classSommet}{double}} {\bfseries PI} = 3.\+14159265358979323846
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Classe utilitaire pour les calculs géographiques. En ACL, on utilise souvent des méthodes statiques pour les "{}boîtes à outils"{}. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classGeoOutils_a888a44deabf46c8600d24a9a13d54442}\label{classGeoOutils_a888a44deabf46c8600d24a9a13d54442} 
+\index{GeoOutils@{GeoOutils}!calculerDistance@{calculerDistance}}
+\index{calculerDistance@{calculerDistance}!GeoOutils@{GeoOutils}}
+\doxysubsubsection{\texorpdfstring{calculerDistance()}{calculerDistance()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classSommet}{static}} \mbox{\hyperlink{classSommet}{double}} Geo\+Outils\+::calculer\+Distance (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classSommet}{const}} \mbox{\hyperlink{classVille}{Ville}} \&}]{v1,  }\item[{\mbox{\hyperlink{classSommet}{const}} \mbox{\hyperlink{classVille}{Ville}} \&}]{v2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Calcule la distance géodésique entre deux villes. 
+\begin{DoxyParams}{Parameters}
+{\em v1} & Première ville \\
+\hline
+{\em v2} & Deuxième ville \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+distance en km 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Partie\+\_\+\+ACL/cpp/\+Outils/include/Geo\+Outils.\+h\end{DoxyCompactItemize}

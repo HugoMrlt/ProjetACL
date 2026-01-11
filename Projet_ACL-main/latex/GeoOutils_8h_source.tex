@@ -1,0 +1,48 @@
+\doxysection{Geo\+Outils.\+h}
+\hypertarget{GeoOutils_8h_source}{}\label{GeoOutils_8h_source}\index{Partie\_ACL/cpp/Outils/include/GeoOutils.h@{Partie\_ACL/cpp/Outils/include/GeoOutils.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PROJET\_ACL\_GEOOUTILS\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PROJET\_ACL\_GEOOUTILS\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <tgmath.h>}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classGeoOutils}{GeoOutils}}\ \{}
+\DoxyCodeLine{00010\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{comment}{//\ Rayon\ moyen\ de\ la\ Terre\ en\ kilomètres}}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{double}\ RAYON\_TERRE\ =\ 6371.0;}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{double}\ PI\ =\ 3.14159265358979323846;}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classGeoOutils_a888a44deabf46c8600d24a9a13d54442}{calculerDistance}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classVille}{Ville}}\&\ \mbox{\hyperlink{classSommet}{v1}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classVille}{Ville}}\&\ \mbox{\hyperlink{classSommet}{v2}})\ \{}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classSommet}{lat1}}\ =\ \mbox{\hyperlink{classSommet}{v1}}.getLatitude();}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classSommet}{lon1}}\ =\ \mbox{\hyperlink{classSommet}{v1}}.getLongitude();}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classSommet}{lat2}}\ =\ \mbox{\hyperlink{classSommet}{v2}}.getLatitude();}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classSommet}{lon2}}\ =\ \mbox{\hyperlink{classSommet}{v2}}.getLongitude();}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classSommet}{lat1Rad}}\ =\ degreVersRadiant(\mbox{\hyperlink{classSommet}{lat1}});}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classSommet}{lon1Rad}}\ =\ degreVersRadiant(\mbox{\hyperlink{classSommet}{lon1}});}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classSommet}{lat2Rad}}\ =\ degreVersRadiant(\mbox{\hyperlink{classSommet}{lat2}});}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classSommet}{lon2Rad}}\ =\ degreVersRadiant(\mbox{\hyperlink{classSommet}{lon2}});}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classSommet}{dlat}}\ =\ \mbox{\hyperlink{classSommet}{lat2Rad}}\ -\/\ \mbox{\hyperlink{classSommet}{lat1Rad}};}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classSommet}{dlon}}\ =\ \mbox{\hyperlink{classSommet}{lon2Rad}}\ -\/\ \mbox{\hyperlink{classSommet}{lon1Rad}};}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classSommet}{a}}\ =\ \mbox{\hyperlink{classSommet}{pow}}(\mbox{\hyperlink{classSommet}{sin}}(\mbox{\hyperlink{classSommet}{dlat}}\ /\ 2),\ 2)\ +\ \mbox{\hyperlink{classSommet}{cos}}(\mbox{\hyperlink{classSommet}{lat1Rad}})\ *\ \mbox{\hyperlink{classSommet}{cos}}(\mbox{\hyperlink{classSommet}{lat2Rad}})\ *\ \mbox{\hyperlink{classSommet}{pow}}(\mbox{\hyperlink{classSommet}{sin}}(\mbox{\hyperlink{classSommet}{dlon}}\ /\ 2),\ 2);}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classSommet}{c}}\ =\ 2\ *\ \mbox{\hyperlink{classSommet}{atan2}}(\mbox{\hyperlink{classSommet}{sqrt}}(\mbox{\hyperlink{classSommet}{a}}),\mbox{\hyperlink{classSommet}{sqrt}}(1\ -\/\ \mbox{\hyperlink{classSommet}{a}}));}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ RAYON\_TERRE\ *\ \mbox{\hyperlink{classSommet}{c}};}
+\DoxyCodeLine{00043\ \ \ \ \ \}}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ degreVersRadiant(\textcolor{keywordtype}{double}\ degre)\ \{}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ degre\ *\ (PI\ /\ 180.0);}
+\DoxyCodeLine{00053\ \ \ \ \ \}}
+\DoxyCodeLine{00054\ \};}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//PROJET\_ACL\_GEOOUTILS\_H}}
+
+\end{DoxyCode}

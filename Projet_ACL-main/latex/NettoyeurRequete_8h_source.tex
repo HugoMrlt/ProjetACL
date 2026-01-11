@@ -1,0 +1,27 @@
+\doxysection{Nettoyeur\+Requete.\+h}
+\hypertarget{NettoyeurRequete_8h_source}{}\label{NettoyeurRequete_8h_source}\index{Partie\_ACL/cpp/Graphes/include/NettoyeurRequete.h@{Partie\_ACL/cpp/Graphes/include/NettoyeurRequete.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ NETTOYEUR\_REQUETE\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ NETTOYEUR\_REQUETE\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <algorithm>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structNettoyeurRequete}{NettoyeurRequete}}\ \{}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keywordtype}{void}\ operator()(std::string\&\ \mbox{\hyperlink{classSommet}{s}})\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Nettoyage\ au\ début}}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classSommet}{first}}\ =\ \mbox{\hyperlink{classSommet}{s}}.find\_first\_not\_of(\textcolor{stringliteral}{"{}\ \(\backslash\)t\(\backslash\)r\(\backslash\)n"{}});}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (std::string::npos\ ==\ \mbox{\hyperlink{classSommet}{first}})\ \{}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSommet}{s}}\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Nettoyage\ à\ la\ fin}}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classSommet}{last}}\ =\ \mbox{\hyperlink{classSommet}{s}}.find\_last\_not\_of(\textcolor{stringliteral}{"{}\ \(\backslash\)t\(\backslash\)r\(\backslash\)n"{}});}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classSommet}{s}}\ =\ \mbox{\hyperlink{classSommet}{s}}.substr(\mbox{\hyperlink{classSommet}{first}},\ (\mbox{\hyperlink{classSommet}{last}}\ -\/\ \mbox{\hyperlink{classSommet}{first}}\ +\ 1));}
+\DoxyCodeLine{00022\ \ \ \ \ \}}
+\DoxyCodeLine{00023\ \};}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

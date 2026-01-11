@@ -1,0 +1,31 @@
+\doxysection{Visiteur\+Affichage.\+h}
+\hypertarget{VisiteurAffichage_8h_source}{}\label{VisiteurAffichage_8h_source}\index{Partie\_ACL/cpp/Graphes/include/VisiteurAffichage.h@{Partie\_ACL/cpp/Graphes/include/VisiteurAffichage.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ VISITEUR\_AFFICHAGE\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ VISITEUR\_AFFICHAGE\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}IVisiteur.h"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}Ville.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}Sommet.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}Arete.h"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classVisiteurAffichage}{VisiteurAffichage}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classIVisiteur}{IVisiteur}}<double,\ Ville>\ \{}
+\DoxyCodeLine{00016\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classVisiteurAffichage_a6666aa5d4f68008fe7fc724d9a44642e}{visiterSommet}}(\mbox{\hyperlink{classSommet}{Sommet<Ville>}}*\ \mbox{\hyperlink{classSommet}{s}})\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}-\/\ Ville\ :\ "{}}\ <<\ \mbox{\hyperlink{classSommet}{s}}-\/>v.getName()}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ (Lat:\ "{}}\ <<\ \mbox{\hyperlink{classSommet}{s}}-\/>v.getLatitude()}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{},\ Long:\ "{}}\ <<\ \mbox{\hyperlink{classSommet}{s}}-\/>v.getLongitude()\ <<\ \textcolor{stringliteral}{"{})"{}}\ <<\ std::endl;}
+\DoxyCodeLine{00026\ \ \ \ \ \}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classVisiteurAffichage_ae4200b9418900e53d40537f4b9ffcb23}{visiterArete}}(\mbox{\hyperlink{classSommet}{Arete<double,\ Ville>}}*\ \mbox{\hyperlink{classSommet}{a}})\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ Route\ ["{}}\ <<\ \mbox{\hyperlink{classSommet}{a}}-\/>debut-\/>v.getName()\ <<\ \textcolor{stringliteral}{"{}\ <-\/>\ "{}}\ <<\ \mbox{\hyperlink{classSommet}{a}}-\/>fin-\/>v.getName()}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}]\ Poids:\ "{}}\ <<\ \mbox{\hyperlink{classSommet}{a}}-\/>v\ <<\ std::endl;}
+\DoxyCodeLine{00036\ \ \ \ \ \}}
+\DoxyCodeLine{00037\ \};}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

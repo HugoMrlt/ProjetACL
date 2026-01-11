@@ -1,0 +1,24 @@
+\doxysection{GElement.\+h}
+\hypertarget{GElement_8h_source}{}\label{GElement_8h_source}\index{Partie\_ACL/cpp/Graphes/include/GElement.h@{Partie\_ACL/cpp/Graphes/include/GElement.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ GELEMENT\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ GELEMENT\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}AElement.h"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <sstream>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classGElement}{GElement}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classAElement}{AElement}}\ \{}
+\DoxyCodeLine{00015\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{comment}{//\ Attribut\ public\ de\ type\ générique\ T\ pour\ la\ valeur.}}
+\DoxyCodeLine{00017\ \ \ \ \ T\ v;}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00026\ \ \ \ \ \mbox{\hyperlink{classGElement_a58b889f61a72f693be92f2b779a50dce}{GElement}}(\textcolor{keywordtype}{int}\ c\ =\ 0,\ T\ val\ =\ T())\ :\ \mbox{\hyperlink{classAElement}{AElement}}(c),\ v(val)\ \{\}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \};}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}
