@@ -1,3 +1,5 @@
+package src.tests;
+
 import org.junit.jupiter.api.Test;
 import src.UtilitaireCalcul;
 import src.modeles.Graphe;

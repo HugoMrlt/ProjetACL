@@ -142,6 +142,10 @@ public:
      */
     Graphe<S, T>& operator=(const Graphe<S, T>& other);
 
+    double getDistanceTotale(int camionId) const;
+    double getDureeTotale(int camionId) const;
+    std::vector<Arete<S, T>*> getAretesTypeInconnu(int camionId) const;
+
 };
 
 /*-------------Implémentation des méthodes-------------*/
@@ -153,8 +157,7 @@ Graphe<S, T>::Graphe(const Graphe<S, T>& other)
     : lSommets(nullptr), lAretes(nullptr), prochaineClef(other.prochaineClef) {
     
     std::map<int, Sommet<T>*> mapSommets;
-    
-    // Copie profonde des sommets
+
     PElement<Sommet<T>*>* currS = other.lSommets;
     while (currS) {
         Sommet<T>* s = new Sommet<T>(currS->v->clef, currS->v->v, 0);
@@ -166,23 +169,17 @@ Graphe<S, T>::Graphe(const Graphe<S, T>& other)
 
 template <typename S, typename T>
 Graphe<S, T>::~Graphe() {
-    // Suppression des arêtes (y compris la chaîne PElement)
+
     if (lAretes) {
         PElement<Arete<S, T>*>* curr = lAretes;
-        // Parcours jusqu'au dernier élément
         while (curr->suivant) curr = curr->suivant;
-        
-        // Maintenant supprime toute la chaîne depuis le dernier
         delete lAretes;  // Le destructeur de PElement se charge du reste
     }
     
     // Suppression des sommets (y compris la chaîne PElement)
     if (lSommets) {
         PElement<Sommet<T>*>* curr = lSommets;
-        // Parcours jusqu'au dernier élément
         while (curr->suivant) curr = curr->suivant;
-        
-        // Maintenant supprime toute la chaîne depuis le dernier
         delete lSommets;  // Le destructeur de PElement se charge du reste
     }
 }
@@ -300,6 +297,74 @@ Arete<S, T>* Graphe<S, T>::getAreteParSommets(const Sommet<T>* s1, const Sommet<
     return nullptr;
 }
 
+
+template <typename S, typename T>
+double Graphe<S, T>::getDistanceTotale(int camionId) const {
+    double total = 0.0;
+    bool trouve = false;
+    PElement<Arete<S, T>*>* curr = lAretes;
+
+    while (curr) {
+        if (camionId == -1 || curr->v->v.camionId == camionId) {
+            total += curr->v->v.poids;
+            trouve = true;
+        }
+        curr = curr->suivant;
+    }
+    return trouve ? total : -1.0;
+}
+
+template <typename S, typename T>
+double Graphe<S, T>::getDureeTotale(int camionId) const {
+    double totalHeures = 0.0;
+    PElement<Arete<S, T>*>* curr = lAretes;
+
+    while (curr) {
+        if (camionId == -1 || curr->v->v.camionId == camionId) {
+            double vitesse = 0;
+            string t = curr->v->v.type;
+
+            if (t == "Autoroute") vitesse = 90.0;
+            else if (t == "Voie rapide" || t == "Route européenne") vitesse = 80.0;
+            else if (t == "Nationale") vitesse = 70.0;
+            else if (t == "Départementale") vitesse = 60.0;
+            else if (t == "Communale") vitesse = 40.0;
+
+            if (vitesse > 0) {
+                totalHeures += (double)curr->v->v.poids / vitesse;
+            }
+        }
+        curr = curr->suivant;
+    }
+    return totalHeures;
+}
+
+template <typename S, typename T>
+std::vector<Arete<S, T>*> Graphe<S, T>::getAretesTypeInconnu(int camionId) const {
+    std::vector<Arete<S, T>*> problemes;
+    PElement<Arete<S, T>*>* curr = lAretes;
+
+    // Utilisation de la même logique que pour la durée
+    auto estVitesseInvalide = [](std::string type) -> bool {
+        if (type == "Autoroute") return false;
+        if (type == "Voie rapide" || type == "Route européenne") return false;
+        if (type == "Nationale") return false;
+        if (type == "Départementale") return false;
+        if (type == "Communale") return false;
+        return true;
+    };
+
+    while (curr) {
+        if (camionId == -1 || curr->v->v.camionId == camionId) {
+            if (estVitesseInvalide(curr->v->v.type)) {
+                problemes.push_back(curr->v);
+            }
+        }
+        curr = curr->suivant;
+    }
+    return problemes;
+}
+
 template <typename S, typename T>
 Graphe<S, T>& Graphe<S, T>::operator=(const Graphe<S, T>& other) {
     if (this == &other) return *this;
@@ -323,8 +388,7 @@ Graphe<S, T>& Graphe<S, T>::operator=(const Graphe<S, T>& other) {
         this->lSommets = new PElement<Sommet<T>*>(s, this->lSommets);
         currS = currS->suivant;
     }
-    
-    // Copie les arêtes
+
     PElement<Arete<S, T>*>* currA = other.lAretes;
     while (currA) {
         Sommet<T>* d = mapSommets[currA->v->debut->clef];

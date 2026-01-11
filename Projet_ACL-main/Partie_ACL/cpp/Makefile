@@ -1,7 +1,7 @@
 # Makefile pour projet Graphes - compilation multi-programmes avec tests
 
 CXX = g++
-CXXFLAGS = -Wall -Wextra -std=c++17 -Iinclude -IModeles/include -IGraphes/include -IOutils/include -Ilib
+CXXFLAGS = -Wall -Wextra -std=c++17 -Iinclude -IModeles/include -IGraphes/include -IOutils/include -Ilib -I../../../../Partie_Algo/code/include
 DEBUG_FLAGS = -g -O0
 
 SRC_DIR = src

@@ -36,7 +36,9 @@ public:
      * @param v - Visiteur à accepter.
      */
     void accept(IVisiteur<double, Ville>* v) override {
-        v->visiterSommet(this);
+        if constexpr (std::is_same_v<T, Ville>) {
+            v->visiterSommet((Sommet<Ville>*)this);
+        }
     }
 };
 

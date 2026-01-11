@@ -7,6 +7,28 @@
 #include <string>
 #include <iostream>
 
+
+
+/**
+ * @brief Structure contenant les données métier d'une route.
+ * C'est ce qui sera utilisé comme type 'S' dans Arete<S, T>.
+ */
+struct Route {
+    int poids;           // Distance en km
+    std::string type;    // "Autoroute", "Nationale", etc.
+    int camionId;        // ID du camion qui l'emprunte
+
+    // Petit constructeur pratique
+    Route(int p = 0, std::string t = "", int c = -1)
+        : poids(p), type(t), camionId(c) {}
+
+    // Surcharge pour l'affichage (utilisé par l'opérateur << de GElement)
+    friend std::ostream& operator<<(std::ostream& os, const Route& r) {
+        os << r.type << " (" << r.poids << "km, Camion:" << r.camionId << ")";
+        return os;
+    }
+};
+
 /**
  * @brief Classe représentant une arête dans un graphe.
  * 
@@ -59,15 +81,16 @@ public:
     }
 
 
-
-    //DP Visitor
     /**
-     * @brief Accepte un visiteur.
-     * 
-     * @param v - Visiteur à accepter.
+     * @brief Accepte un visiteur pour appliquer un algorithme ou un calcul sur l'arête.
+     * Utilise 'if constexpr' pour vérifier au moment de la compilation si le type
+     * de données de l'arête (S) est compatible avec le visiteur (double).
+     * * @param v - Pointeur vers le visiteur (IVisiteur) à accepter.
      */
     void accept(IVisiteur<double, Ville>* v) override {
-        v->visiterArete(this);
+        if constexpr (std::is_same_v<S, double>) {
+            v->visiterArete((Arete<double, Ville>*)this);
+        }
     }
 };
 

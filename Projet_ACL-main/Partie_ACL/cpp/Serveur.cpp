@@ -5,7 +5,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <unistd.h>
-#include <json.hpp> 
+#include <json.hpp>
 
 #include "Ville.h"
 #include "GeoOutils.h"
@@ -16,22 +16,33 @@
 #include "JsonOutils.h"
 #include "Constantes.h"
 #include "CsvOutils.h"
+#include "SelecteurMeilleurVoisin.h"
+#include "NettoyeurRequete.h"
+
+#include <cstring>
+extern "C" {
+    #include "algo_dyn.h"
+    #include "instance.h"
+    #include "schedule.h"
+    #include "list.h"
+    #include "fptas.h"
+}
 
 using json = nlohmann::json;
 using namespace std;
 
 /**
  * @brief Point d'entrée du serveur C++ pour le TSP.
- * 
- * @return int 
+ *
+ * @return int
  */
 int main() {
     int server_fd, new_socket;
     struct sockaddr_in address;
     int addrlen = sizeof(address);
+    int opt = 1;
 
     server_fd = socket(AF_INET, SOCK_STREAM, 0);
-    int opt = 1;
     setsockopt(server_fd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt));
 
     address.sin_family = AF_INET;
@@ -43,21 +54,58 @@ int main() {
         return -1;
     }
     listen(server_fd, 3);
+
     std::cout << "Serveur TSP C++ pret sur le port 8080..." << endl;
 
-    string region, mode, villeDepart;
-    int nbCamions = 1;
-    vector<Ville> baseVilles;
-    auto mapTypesRoutes = std::map<std::string, std::map<std::string, std::string>>();
+    Graphe<Route, Ville> dernierGrapheCalcule;
+
 
     while (true) {
         new_socket = accept(server_fd, (struct sockaddr *)&address, (socklen_t*)&addrlen);
-
         char buffer[2048] = {0};
         read(new_socket, buffer, 2048);
-        string requete(buffer);
-        std::cout << "Requete Java recue : " << requete << endl;
 
+        string requeteBrute(buffer);
+        NettoyeurRequete nettoyer;
+        string requete = requeteBrute;
+        nettoyer(requete);
+
+        std::cout << "Requete recue : " << requete << endl;
+
+        if (requete.find("GET_DISTANCE") == 0) {
+            int camionId = stoi(requete.substr(13));
+            double d = dernierGrapheCalcule.getDistanceTotale(camionId);
+            string resp = to_string(d) + "\n";
+            send(new_socket, resp.c_str(), resp.length(), 0);
+            close(new_socket);
+            continue;
+        }
+        else if (requete.find("GET_DUREE") == 0) {
+            int camionId = stoi(requete.substr(10));
+            double t = dernierGrapheCalcule.getDureeTotale(camionId);
+            string resp = to_string(t) + "\n";
+            send(new_socket, resp.c_str(), resp.length(), 0);
+            close(new_socket);
+            continue;
+        }
+        else if (requete.find("GET_PROBLEMES") == 0) {
+            int camionId = stoi(requete.substr(14));
+            auto problemes = dernierGrapheCalcule.getAretesTypeInconnu(camionId);
+            string resp = "";
+            for(size_t i=0; i<problemes.size(); ++i) {
+                resp += to_string(i) + (i == problemes.size()-1 ? "" : ",");
+            }
+            resp += "\n";
+            send(new_socket, resp.c_str(), resp.length(), 0);
+            close(new_socket);
+            continue;
+        }
+
+
+        dernierGrapheCalcule = Graphe<Route, Ville>();
+
+        string region, mode, villeDepart;
+        int nbCamions = 1;
         stringstream ss(requete);
         getline(ss, region, ';');
         getline(ss, mode, ';');
@@ -65,99 +113,103 @@ int main() {
         string nbCamionsStr;
         getline(ss, nbCamionsStr, ';');
 
-        // RECUPERATION DU NOMBRE DE CAMIONS DEPUIS JAVA
-        try {
-            nbCamions = stoi(nbCamionsStr);
-            if (nbCamions < 1) nbCamions = 1;
-        } catch (...) {
-            nbCamions = 1;
-        }
-
-        region.erase(0, region.find_first_not_of(" \t\r\n"));
-        region.erase(region.find_last_not_of(" \t\r\n") + 1);
-        mode.erase(0, mode.find_first_not_of(" \t\r\n"));
-        mode.erase(mode.find_last_not_of(" \t\r\n") + 1);
-        villeDepart.erase(0, villeDepart.find_first_not_of(" \t\r\n"));
-        villeDepart.erase(villeDepart.find_last_not_of(" \t\r\n") + 1);
+        try { nbCamions = stoi(nbCamionsStr); if (nbCamions < 1) nbCamions = 1; } catch (...) { nbCamions = 1; }
 
         string cheminVilles = trouverCheminAssets("Region/" + region + ".json");
-        baseVilles = JsonOutils::chargerDepuisFichier(cheminVilles);
+        vector<Ville> baseVilles = JsonOutils::chargerDepuisFichier(cheminVilles);
         string cheminCSV = trouverCheminAssets("Type_de_route/" + region + ".csv");
-        mapTypesRoutes = CsvOutils::chargerTypesRoute(cheminCSV);
+        auto mapTypesRoutes = CsvOutils::chargerTypesRoute(cheminCSV);
 
-        Graphe<double, Ville> grapheDistance;
-        vector<Sommet<Ville>*> sommetsSelectionnes;
         IStrategieTSP* strat = (mode == "TEMPS") ? (IStrategieTSP*)new TSPTemps() : (IStrategieTSP*)new TSPDistance();
 
-        vector<string> nomsVilles;
-        nomsVilles.push_back(villeDepart);
+        // Trouver le dépôt
+        Ville depot("", 0, 0);
+        for (const auto& v : baseVilles) { if (v.getName() == villeDepart) { depot = v; break; } }
+        if (depot.getName() == "" && !baseVilles.empty()) depot = baseVilles[0];
+
+        // --- PHASE 1 : CLUSTERING (FPTAS + Algo Dyn) ---
+        list_t* instanceList = new_list();
         for (const auto& v : baseVilles) {
-            if (v.getName() != villeDepart) nomsVilles.push_back(v.getName());
-        }
-        for (const auto& nomVille : nomsVilles) {
-            for (const auto& v : baseVilles) {
-                if (v.getName() == nomVille) {
-                    sommetsSelectionnes.push_back(grapheDistance.creeSommet(v));
-                    break;
-                }
-            }
+            if (v.getName() == depot.getName()) continue;
+            double dist = GeoOutils::calculerDistance(depot, v);
+            string type = CsvOutils::getTypeRoute(mapTypesRoutes, depot.getName(), v.getName());
+            unsigned long p_val = (unsigned long)(strat->calculerPoids(dist, type) * 100);
+            list_insert_last(instanceList, new_task(strdup(v.getName().c_str()), p_val > 0 ? p_val : 1, 0));
         }
 
-        for (size_t i = 0; i < sommetsSelectionnes.size(); ++i) {
-            for (size_t j = i + 1; j < sommetsSelectionnes.size(); ++j) {
-                double distKm = GeoOutils::calculerDistance(sommetsSelectionnes[i]->v, sommetsSelectionnes[j]->v);
-                string typeRouteReel = CsvOutils::getTypeRoute(mapTypesRoutes, sommetsSelectionnes[i]->v.getName(), sommetsSelectionnes[j]->v.getName());
-                double poids = strat->calculerPoids(distKm, typeRouteReel);
-                grapheDistance.creeArete(poids, sommetsSelectionnes[i], sommetsSelectionnes[j]);
-                grapheDistance.creeArete(poids, sommetsSelectionnes[j], sommetsSelectionnes[i]);
-            }
-        }
-
-        vector<Sommet<Ville>*> solution = TSP<double, Ville>::plusProcheVoisin(grapheDistance, sommetsSelectionnes[0]);
+        schedule_t* schedule = NULL;
+        Instance instanceReduite = fptas_PmLmax(instanceList, nbCamions, 0.5);
+        dynamic_programming_PmLmax(instanceReduite, nbCamions, 0, &schedule);
 
         json res;
         res["windowName"] = "Tournee - " + to_string(nbCamions) + " Camions";
         res["vertices"] = json::array();
         res["edges"] = json::array();
 
-        for (auto* s : sommetsSelectionnes) {
-            res["vertices"].push_back({
-                {"ville", s->v.getName()},
-                {"latitude", (double)s->v.getLatitude()},
-                {"longitude", (double)s->v.getLongitude()}
-            });
+        for (const auto& v : baseVilles) {
+            res["vertices"].push_back({{"ville", v.getName()},{"latitude", v.getLatitude()},{"longitude", v.getLongitude()}});
         }
 
-        if (!solution.empty()) {
-            auto depot = solution[0];
-            vector<Sommet<Ville>*> clients(solution.begin() + 1, solution.end());
-            int total = clients.size();
-            int parCamion = (total + nbCamions - 1) / nbCamions;
+        if (schedule) {
+            for (int m = 0; m < nbCamions; ++m) {
+                vector<Ville> clusterVilles;
+                clusterVilles.push_back(depot);
+                list_t* tasks = get_schedule_of_machine(schedule, m);
+                list_node_t* node = get_list_head(tasks);
+                while(node) {
+                    string villeName = get_task_id(get_schedule_node_task((schedule_node_t*)get_list_node_data(node)));
+                    for(const auto& v : baseVilles) { if(v.getName() == villeName) clusterVilles.push_back(v); }
+                    node = get_successor(node);
+                }
 
-            for (int c = 0; c < nbCamions; ++c) {
-                int startIdx = c * parCamion;
-                if (startIdx >= total) break;
-                int endIdx = min(startIdx + parCamion, total);
-                int currentTruckId = c + 1;
+                if (clusterVilles.size() <= 1) continue;
 
-                vector<Sommet<Ville>*> trajet;
-                trajet.push_back(depot);
-                for (int i = startIdx; i < endIdx; ++i) trajet.push_back(clients[i]);
-                trajet.push_back(depot);
+                Graphe<double, Ville> subGraphe;
+                vector<Sommet<Ville>*> subSommets;
+                for(const auto& v : clusterVilles) subSommets.push_back(subGraphe.creeSommet(v));
 
-                for (size_t i = 0; i < trajet.size() - 1; ++i) {
-                    if (trajet[i]->v.getName() == trajet[i+1]->v.getName()) continue;
+                for (size_t i = 0; i < subSommets.size(); ++i) {
+                    for (size_t j = i + 1; j < subSommets.size(); ++j) {
+                        double d = GeoOutils::calculerDistance(subSommets[i]->v, subSommets[j]->v);
+                        string t = CsvOutils::getTypeRoute(mapTypesRoutes, subSommets[i]->v.getName(), subSommets[j]->v.getName());
+                        double w = strat->calculerPoids(d, t);
+                        subGraphe.creeArete(w, subSommets[i], subSommets[j]);
+                        subGraphe.creeArete(w, subSommets[j], subSommets[i]);
+                    }
+                }
+
+                SelecteurMeilleurVoisin<double, Ville> selecteur;
+                auto parcours = TSP<double, Ville>::plusProcheVoisin(subGraphe, subSommets[0], selecteur);
+
+                // --- REMPLISSAGE DU GRAPHE METIER (IMPORTANT) ---
+                for (size_t i = 0; i < parcours.size(); ++i) {
+                    Sommet<Ville>* s1 = parcours[i];
+                    Sommet<Ville>* s2 = parcours[(i + 1) % parcours.size()];
+
+                    int distKm = (int)GeoOutils::calculerDistance(s1->v, s2->v);
+                    string typeR = CsvOutils::getTypeRoute(mapTypesRoutes, s1->v.getName(), s2->v.getName());
+
+                    // On ajoute l'arête dans notre objet de calcul métier
+                    Route routeData(distKm, typeR, m + 1); // m+1 est le camionId
+                    auto sommetA = dernierGrapheCalcule.creeSommet(s1->v);
+                    auto sommetB = dernierGrapheCalcule.creeSommet(s2->v);
+                    dernierGrapheCalcule.creeArete(routeData, sommetA, sommetB);
+
 
                     res["edges"].push_back({
-                        {"v1", trajet[i]->v.getName()},
-                        {"v2", trajet[i+1]->v.getName()},
-                        {"poids", (int)GeoOutils::calculerDistance(trajet[i]->v, trajet[i+1]->v)},
-                        {"type", CsvOutils::getTypeRoute(mapTypesRoutes, trajet[i]->v.getName(), trajet[i+1]->v.getName())},
-                        {"camion", currentTruckId} // TRANSMISSION DE L'ID AU JAVA
+                        {"v1", s1->v.getName()}, {"v2", s2->v.getName()},
+                        {"poids", distKm}, {"type", typeR}, {"camion", m + 1}
                     });
                 }
             }
+            delete_schedule(schedule);
         }
+
+        delete_list(instanceList, &delete_task);
+        delete_list(instanceReduite, &delete_task);
+
+        res["distance_totale"] = dernierGrapheCalcule.getDistanceTotale(-1);
+        res["duree_totale"] = dernierGrapheCalcule.getDureeTotale(-1);
 
         string response = res.dump() + "\n";
         send(new_socket, response.c_str(), response.length(), 0);

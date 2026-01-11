@@ -415,6 +415,11 @@ public class PanneauControle extends JPanel {
     /**
      * Met à jour l'affichage du coût total selon le camion sélectionné ou tout le graphe.
      */
+    /**
+     * Met à jour l'affichage du coût total.
+     * Note : Le calcul par camion individuel doit être géré par le serveur C++
+     * pour respecter la consigne de non-modélisation côté Java.
+     */
     private void mettreAJourCout() {
         Graphe g = panneauGraphe.getGraphe();
         if (g == null) {
@@ -423,26 +428,30 @@ public class PanneauControle extends JPanel {
             return;
         }
 
-        String sel = (String) selecteurCamion.getSelectedItem();
-        int camionId = -1;
-        if (sel != null && !sel.equals("Tous les camions"))
-            camionId = Integer.parseInt(sel.replace("Camion ", ""));
-
-        double distance = g.getDistanceTotale(camionId);
-        double duree = g.getDureeTotale(camionId);
+        // On récupère les valeurs globales stockées dans l'objet Graphe
+        // (Valeurs qui ont été calculées par le C++ et transmises via JSON)
+        double distance = g.getDistanceTotale();
+        double duree = g.getDureeTotale();
 
         coutDistanceValeur.setText(formatDistance(distance));
 
-        if (Double.isInfinite(duree) && duree < 0) {
+        // Gestion de l'erreur de durée (si le serveur a renvoyé une valeur négative)
+        if (duree < 0) {
             coutDureeValeur.setText("<html><font color='red'>ERREUR</font></html>");
-            java.util.ArrayList<Arete> problemes = g.getAretesTypeInconnu(camionId);
-            StringBuilder msg = new StringBuilder("Routes avec type inconnu :\n\n");
-            for (Arete a : problemes) {
-                msg.append("• ").append(a.getSommet1().getNom())
-                   .append(" ↔ ").append(a.getSommet2().getNom())
-                   .append(" (type: \"").append(a.getTypeRoute()).append("\")\n");
+
+            // On récupère les arêtes du graphe pour identifier celles qui n'ont pas de type
+            StringBuilder msg = new StringBuilder("Certaines routes ont un type inconnu.\n");
+            msg.append("Vérifiez le fichier CSV des types de routes côté Serveur.\n\n");
+            msg.append("Détails des arêtes reçues :\n");
+
+            for (Arete a : g.getAretes()) {
+                if (a.getTypeRoute() == null || a.getTypeRoute().equals("Inconnu")) {
+                    msg.append("• ").append(a.getSommet1().getNom())
+                            .append(" ↔ ").append(a.getSommet2().getNom())
+                            .append(" (type: \"").append(a.getTypeRoute()).append("\")\n");
+                }
             }
-            msg.append("\nVérifiez le fichier CSV des types de routes.");
+
             JOptionPane.showMessageDialog(this, msg.toString(), "Problème de données", JOptionPane.WARNING_MESSAGE);
         } else {
             coutDureeValeur.setText(formatDuree(duree));

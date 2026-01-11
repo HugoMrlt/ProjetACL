@@ -25,25 +25,33 @@ public class UtilitaireCalcul {
         StringBuilder sb = new StringBuilder();
         String ligne;
 
-        // Lecture du flux ligne par ligne pour reconstruire la chaîne JSON complète.
         while ((ligne = fluxEntrant.readLine()) != null)
             sb.append(ligne);
 
-        String json = sb.toString().trim();
+        String jsonStr = sb.toString().trim();
 
-        // Vérification sommaire de la validité du format JSON.
-        if (json.isEmpty() || !json.startsWith("{"))
+        if (jsonStr.isEmpty() || !jsonStr.startsWith("{"))
             return null;
 
-        // Extraction du nom de la fenêtre et traitement séquentiel des données.
-        String nomFenetre = new JSONObject(json).getString("windowName");
-        List<Sommet> sommets = lireSommets(json);
+        JSONObject obj = new JSONObject(jsonStr); // On crée l'objet JSON une seule fois
+        String nomFenetre = obj.getString("windowName");
 
-        // Calcul automatique du placement des points sur l'écran avant de créer les arêtes.
-        convertirCoordonneesVersEcran(sommets);
-        List<Arete> aretes = lireAretes(json, sommets);
+        // Extraction des données classiques
+        List<Sommet> sommets = lireSommets(jsonStr);
+        List<Arete> aretes = lireAretes(jsonStr, sommets);
 
-        return new Graphe(nomFenetre, sommets, aretes);
+        // Création du graphe
+        Graphe g = new Graphe(nomFenetre, sommets, aretes);
+
+        if (obj.has("distance_totale")) {
+            g.setDistanceTotale(obj.getDouble("distance_totale"));
+        }
+
+        if (obj.has("duree_totale")) {
+            g.setDureeTotale(obj.getDouble("duree_totale"));
+        }
+
+        return g;
     }
 
     /**
@@ -117,13 +125,11 @@ public class UtilitaireCalcul {
             String v1Name = o.getString("v1"), v2Name = o.getString("v2");
             Sommet v1 = null, v2 = null;
 
-            // Recherche des objets Sommet correspondants aux noms trouvés dans l'arête.
             for (Sommet v : sommets) {
                 if (v.getNom().equals(v1Name)) v1 = v;
                 if (v.getNom().equals(v2Name)) v2 = v;
             }
 
-            // Si les deux sommets existent, on crée l'arête avec ses propriétés (poids, type, camion).
             if (v1 != null && v2 != null) {
                 list.add(new Arete(v1, v2, o.getInt("poids"), o.optString("type", "communale"), o.optInt("camion", 1)));
             }

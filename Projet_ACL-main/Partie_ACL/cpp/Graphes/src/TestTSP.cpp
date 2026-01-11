@@ -13,6 +13,7 @@
 #include "TSPDistance.h"
 #include "VisiteurAffichage.h"
 #include "VisiteurStatistiques.h"
+#include "SelecteurMeilleurVoisin.h"
 
 using namespace std;
 
@@ -57,7 +58,8 @@ int main() {
         }
 
         if (!sommetsDist.empty()) {
-            auto parcours = TSP<double, Ville>::plusProcheVoisin(grapheDistance, sommetsDist[0]);
+            SelecteurMeilleurVoisin<double, Ville> choisirVoisin;
+            auto parcours = TSP<double, Ville>::plusProcheVoisin(grapheDistance, sommetsDist[0],choisirVoisin);
 
             cout << "\n>>> Resultat Parcours DISTANCE :" << endl;
             stats.reset(); // On remet les compteurs à zéro
@@ -101,7 +103,8 @@ int main() {
         }
 
         if (!sommetsTemps.empty()) {
-            auto parcours = TSP<double, Ville>::plusProcheVoisin(grapheTemps, sommetsTemps[0]);
+            SelecteurMeilleurVoisin<double, Ville> choisirVoisin;
+            auto parcours = TSP<double, Ville>::plusProcheVoisin(grapheTemps, sommetsTemps[0],choisirVoisin);
             cout << "\n>>> Resultat Parcours TEMPS :" << endl;
             for (size_t i = 0; i < parcours.size(); ++i) {
                 parcours[i]->accept(&afficheur); // Affichage de l'étape via visiteur

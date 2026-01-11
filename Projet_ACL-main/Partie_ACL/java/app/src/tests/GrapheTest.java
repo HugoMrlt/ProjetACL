@@ -1,3 +1,5 @@
+package src.tests;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import src.modeles.*;
@@ -10,84 +12,68 @@ import java.util.List;
 
 class GrapheTest {
 
-	private Graphe graphe;
-	private Sommet s1, s2, s3;
-	private Arete a1, a2, a3;
+    private Graphe graphe;
+    private Sommet s1, s2, s3;
+    private Arete a1, a2, a3;
 
-	@BeforeEach
-	void setUp() {
-		// Initialisation des sommets
-		s1 = new Sommet("Ville A", 0, 0);
-		s2 = new Sommet("Ville B", 10, 0);
-		s3 = new Sommet("Ville C", 10, 10);
-		List<Sommet> sommets = Arrays.asList(s1, s2, s3);
+    @BeforeEach
+    void setUp() {
+        // Initialisation des sommets (coordonnées monde)
+        s1 = new Sommet("Ville A", 48.8566, 2.3522);
+        s2 = new Sommet("Ville B", 45.7640, 4.8357);
+        s3 = new Sommet("Ville C", 43.2965, 5.3698);
+        List<Sommet> sommets = Arrays.asList(s1, s2, s3);
 
-		// Initialisation des arêtes
-		// Supposons : Autoroute (130km/h), Départementale (80km/h)
-		a1 = new Arete(s1, s2, 130, "Autoroute", 1);
-		a2 = new Arete(s2, s3, 80, "Départementale", 1);
-		a3 = new Arete(s1, s3, 50, "Ville", 2); // Camion différent
+        // Initialisation des arêtes (Données passives)
+        a1 = new Arete(s1, s2, 130, "Autoroute", 1);
+        a2 = new Arete(s2, s3, 80, "Départementale", 1);
+        a3 = new Arete(s1, s3, 50, "Nationale", 2);
 
-		List<Arete> aretes = Arrays.asList(a1, a2, a3);
+        List<Arete> aretes = Arrays.asList(a1, a2, a3);
 
-		graphe = new Graphe("Carte Test", sommets, aretes);
-	}
+        // Création du graphe
+        graphe = new Graphe("Test Graphe", sommets, aretes);
+    }
 
-	@Test
-	void testGetDistanceTotaleToutesAretes() {
-		// 130 + 80 + 50 = 260
-		assertEquals(260.0, graphe.getDistanceTotale(-1), 0.001);
-	}
+    @Test
+    void testGetSommetsEtAretes() {
+        assertEquals(3, graphe.getSommets().size());
+        assertEquals(3, graphe.getAretes().size());
+    }
 
-	@Test
-	void testGetDistanceTotaleParCamion() {
-		// Camion 1 : 130 + 80 = 210
-		assertEquals(210.0, graphe.getDistanceTotale(1), 0.001);
-		// Camion 2 : 50
-		assertEquals(50.0, graphe.getDistanceTotale(2), 0.001);
-	}
+    @Test
+    void testDistanceTotale() {
+        // On simule la réception d'une valeur calculée par le serveur C++
+        double distanceSimulee = 260.0;
+        graphe.setDistanceTotale(distanceSimulee);
 
-	@Test
-	void testGetDistanceTotaleCamionInexistant() {
-		assertTrue(Double.isNaN(graphe.getDistanceTotale(99)));
-	}
+        // On vérifie que le getter (sans argument) renvoie bien la valeur stockée
+        assertEquals(260.0, graphe.getDistanceTotale(), 0.001);
+    }
 
-	@Test
-	void testGetDureeTotale() {
-		// Camion 1 :
-		// a1: 130km / 130km/h = 1h
-		// a2: 80km / 80km/h = 1h
-		// Total = 2h
-		assertEquals(2.0, graphe.getDureeTotale(1), 0.001);
-	}
+    @Test
+    void testDureeTotale() {
+        // On simule la réception d'une durée calculée par le serveur C++
+        double dureeSimulee = 3.5;
+        graphe.setDureeTotale(dureeSimulee);
 
-	@Test
-	void testGetDureeTotaleGrapheComplet() {
-		// On suppose que "Ville" dans TypeRoute a une vitesse définie (ex: 50km/h)
-		// Camion 1 (2h) + Camion 2 (50km / 50km/h = 1h) = 3h
-		assertEquals(3.0, graphe.getDureeTotale(-1), 0.001);
-	}
+        assertEquals(3.5, graphe.getDureeTotale(), 0.001);
+    }
 
-	@Test
-	void testGetDureeTotaleAvecRouteInconnue() {
-		// Ajout d'une arête avec un type inexistant ou vitesse <= 0
-		Arete aInconnue = new Arete(s1, s2, 100, "RouteInexistante", 3);
-		List<Arete> nouvellesAretes = new ArrayList<>(graphe.getAretes());
-		nouvellesAretes.add(aInconnue);
+    @Test
+    void testFiltrageParCamion() {
+        // Ce test vérifie une fonction utilitaire d'affichage (autorisée en Java)
+        List<Arete> aretesCamion2 = graphe.getAretesParCamion(2);
 
-		Graphe grapheInconnu = new Graphe("Test Inconnu", graphe.getSommets(), nouvellesAretes);
+        assertEquals(1, aretesCamion2.size());
+        assertEquals("Nationale", aretesCamion2.get(0).getTypeRoute());
+        assertEquals(50, aretesCamion2.get(0).getPoids());
+    }
 
-		// La durée pour le camion 3 devrait être NaN car la vitesse est inconnue
-		assertTrue(Double.isNaN(grapheInconnu.getDureeTotale(3)));
-
-		// La durée totale du graphe ne devrait pas changer car l'arête inconnue est ignorée
-		assertEquals(3.0, grapheInconnu.getDureeTotale(-1), 0.001);
-	}
-
-	@Test
-	void testGetters() {
-		assertEquals("Carte Test", graphe.getWindowName());
-		assertEquals(3, graphe.getSommets().size());
-		assertEquals(3, graphe.getAretes().size());
-	}
+    @Test
+    void testDureeErreur() {
+        // On teste le comportement en cas d'erreur de calcul serveur (valeur négative)
+        graphe.setDureeTotale(-1.0);
+        assertTrue(graphe.getDureeTotale() < 0);
+    }
 }

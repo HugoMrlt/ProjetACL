@@ -20,7 +20,8 @@ public:
      * @param depart : sommet de départ
      * @return vecteur de sommets dans l'ordre de visite
      */
-    static std::vector<Sommet<T>*> plusProcheVoisin(const Graphe<S, T>& graphe, Sommet<T>* depart) {
+    template<typename SelecteurVoisin>
+    static std::vector<Sommet<T>*> plusProcheVoisin(const Graphe<S, T>& graphe, Sommet<T>* depart,SelecteurVoisin choisir) {
         std::vector<Sommet<T>*> parcours;
 
         if (!depart || graphe.lSommets == nullptr) return parcours;
@@ -41,8 +42,11 @@ public:
 
         // 3. Boucle gloutonne
         while (!aVisiter.empty()) {
-            double minDist = std::numeric_limits<double>::max();
+            //double minDist = std::numeric_limits<double>::max();
             int indexMeilleurVoisin = -1;
+
+            indexMeilleurVoisin = choisir(courant, aVisiter, graphe);
+            /**
 
             // Recherche du voisin le plus proche dans la liste "aVisiter"
             for (size_t i = 0; i < aVisiter.size(); ++i) {
@@ -57,6 +61,7 @@ public:
                     }
                 }
             }
+            **/
 
             if (indexMeilleurVoisin == -1) {
                 break;
